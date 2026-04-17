@@ -1,12 +1,19 @@
 from __future__ import annotations
 
 import uuid
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from typing import Any
+
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.cache import cache_get, source_cache_key
 from app.engine.config import ENGINE_VERSION
 from app.engine.risk import evaluate
+from app.models.orm import (
+    DispatchEvaluation,
+    DispatchEvaluationSource,
+    DispatchReasonItem,
+)
 from app.models.schemas import (
     DispatchJobInput,
     DispatchRiskResult,
@@ -19,6 +26,7 @@ from app.models.schemas import (
     SourceFreshness,
     Warning,
 )
+from app.repositories.dispatch_repo import save_evaluation
 
 
 async def _fetch_snapshots(
@@ -73,15 +81,75 @@ def _has_critical_failure(sources: dict[str, Any]) -> bool:
     return sources.get("traffic") is None and sources.get("terminal_congestion") is None
 
 
-async def evaluate_dispatch(job: DispatchJobInput) -> DispatchRiskResult:
+async def _persist_evaluation(
+    db: AsyncSession | None,
+    eval_id: str,
+    job: DispatchJobInput,
+    result_status: str,
+    engine_result: dict[str, Any],
+    now: datetime,
+) -> None:
+    if db is None:
+        return
+    try:
+        evaluation = DispatchEvaluation(
+            evaluation_id=eval_id,
+            origin_zone_id=job.origin_zone_id,
+            terminal_code=job.terminal_code,
+            cut_off_at=job.cut_off_at,
+            conservative_mode=job.conservative_mode,
+            manual_buffer_minutes=job.manual_buffer_minutes,
+            result_status=result_status,
+            risk_score=engine_result["risk_score"],
+            risk_level=engine_result["risk_level"],
+            on_time_probability=engine_result["on_time_probability"],
+            latest_safe_dispatch_at=engine_result["latest_safe_dispatch_at"],
+            estimated_total_minutes=engine_result["estimated_total_minutes"],
+            verdict=engine_result["verdict"],
+            engine_version=engine_result["engine_version"],
+        )
+
+        reason_items = []
+        for i, r in enumerate(engine_result["reason_items"]):
+            reason_items.append(
+                DispatchReasonItem(
+                    code=r["code"],
+                    label=r["label"],
+                    contribution_percent=r["contribution_percent"],
+                    impact_minutes=r["impact_minutes"],
+                    direction=r["direction"],
+                    display_order=i,
+                    summary=r["summary"],
+                )
+            )
+
+        fallbacks = engine_result.get("used_fallbacks", {})
+        source_links = []
+        for source_type in ["traffic", "congestion", "gate"]:
+            source_links.append(
+                DispatchEvaluationSource(
+                    source_type=source_type,
+                    used_fallback=fallbacks.get(source_type, False),
+                )
+            )
+
+        await save_evaluation(db, evaluation, reason_items, source_links)
+    except Exception:
+        pass
+
+
+async def evaluate_dispatch(
+    job: DispatchJobInput, db: AsyncSession | None = None
+) -> DispatchRiskResult:
     now = datetime.now(timezone.utc)
+    eval_id = str(uuid.uuid4())
     sources, freshness_list, warnings = await _fetch_snapshots(
         job.origin_zone_id, job.terminal_code
     )
 
     if _has_critical_failure(sources):
         return DispatchRiskResult(
-            evaluation_id=str(uuid.uuid4()),
+            evaluation_id=eval_id,
             result_status=ResultStatus.FAILED,
             risk_score=0,
             risk_level="LOW",
@@ -112,10 +180,12 @@ async def evaluate_dispatch(job: DispatchJobInput) -> DispatchRiskResult:
         operation_snapshot=sources.get("terminal_operation"),
     )
 
+    await _persist_evaluation(db, eval_id, job, result_status.value, engine_result, now)
+
     reason_items = [ReasonItem(**r) for r in engine_result["reason_items"]]
 
     return DispatchRiskResult(
-        evaluation_id=str(uuid.uuid4()),
+        evaluation_id=eval_id,
         result_status=result_status,
         risk_score=engine_result["risk_score"],
         risk_level=engine_result["risk_level"],
@@ -139,8 +209,6 @@ async def simulate_dispatch(sim: SimulationInput) -> SimulationResult:
 
     scenarios: list[ScenarioResult] = []
     base_scenario: ScenarioResult | None = None
-
-    from datetime import timedelta
 
     for offset in sim.scenario_offsets_minutes:
         shifted_now = now + timedelta(minutes=offset)

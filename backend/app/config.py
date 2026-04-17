@@ -20,6 +20,9 @@ class Settings(BaseSettings):
     port_api_base_url: str = ""
     port_api_key: str = ""
 
+    # Auth
+    api_key: str = ""  # empty = no auth required
+
     # Engine
     engine_version: str = "v1.0.0"
     default_buffer_minutes: int = 15

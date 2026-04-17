@@ -4,6 +4,10 @@ A web-based decision-support tool that estimates whether an inbound container jo
 
 **From congestion visibility to dispatch decision.**
 
+📖 **Documentation**: [https://yeongseon.github.io/incheon-port-cutoff-radar/](https://yeongseon.github.io/incheon-port-cutoff-radar/)
+
+🚀 **Live Demo**: [https://yeongseon.github.io/incheon-port-cutoff-radar/demo/](https://yeongseon.github.io/incheon-port-cutoff-radar/demo/)
+
 ## What it does
 
 Enter origin zone, destination terminal, and cut-off time → get:
@@ -17,10 +21,12 @@ Enter origin zone, destination terminal, and cut-off time → get:
 
 | Layer | Stack |
 |-------|-------|
-| Frontend | React 19, TypeScript, Vite, Tailwind CSS, Recharts |
-| Backend | Python 3.10+, FastAPI, Pydantic v2 |
+| Frontend | React 19, TypeScript, Vite 8, Tailwind CSS v4, Recharts |
+| Backend | Python 3.10+, FastAPI, Pydantic v2, SQLAlchemy |
 | Database | PostgreSQL 16, Redis 7 |
+| Docs | MkDocs Material (white theme) |
 | Infra | Docker Compose |
+| CI/CD | GitHub Actions → GitHub Pages |
 
 ## Quick Start
 
@@ -60,6 +66,8 @@ cd backend
 python3 -m pytest tests/ -v
 ```
 
+46 tests passing (23 unit-engine + 13 unit-normalizers + 10 integration-api).
+
 ## API Endpoints
 
 | Method | Path | Description |
@@ -74,7 +82,7 @@ python3 -m pytest tests/ -v
 ```
 ├── backend/
 │   ├── app/
-│   │   ├── api/          # FastAPI routes
+│   │   ├── api/          # FastAPI routes + middleware
 │   │   ├── engine/        # Risk calculation engine + config
 │   │   ├── models/        # Pydantic schemas + ORM models
 │   │   ├── services/      # Business logic orchestration
@@ -82,38 +90,40 @@ python3 -m pytest tests/ -v
 │   │   ├── normalizers/   # Source data normalization
 │   │   ├── repositories/  # DB/cache access
 │   │   └── scheduler/     # Data ingestion scheduler
-│   └── tests/
+│   ├── tests/
+│   └── alembic/           # DB migrations
 ├── frontend/
 │   └── src/
-│       ├── api/           # API client
+│       ├── api/           # API client + mock engine
 │       ├── components/    # Reusable UI components
 │       └── pages/         # Input + Result pages
+├── docs/                  # MkDocs documentation source
+│   ├── specs/             # 13 spec documents (00-12)
+│   └── guide/             # Quick start, API ref, engine docs
+├── mkdocs.yml             # MkDocs configuration
 ├── docker-compose.yml
-└── README.md
+└── .github/workflows/     # CI/CD for GitHub Pages
 ```
 
-## Supported Terminals
+## Documentation
 
-| Code | Name |
-|------|------|
-| ICT | Incheon Container Terminal |
-| E1 | E1 Container Terminal |
-| SNCT | Sun Kwang New Container Terminal |
-| HJIT | Hanjin Incheon Terminal |
-| SGT | Sungmin Terminal |
+Full spec documents available at the [docs site](https://yeongseon.github.io/incheon-port-cutoff-radar/):
 
-## Origin Zones
-
-SONGDO, NAMDONG, SEOGU, YEONSU, BUPYEONG, SIHEUNG, ANSAN
-
-## Risk Engine
-
-Rule-based deterministic engine (v1.0.0):
-- Total lead time = road travel + terminal wait + gate adjustment + safety buffer
-- Slack = cut-off - now - total lead time
-- Slack mapped to risk score and heuristic probability via lookup table
-- Conservative mode adds extra buffer
-- Stale data sources add freshness penalty
+| Doc | Title |
+|-----|-------|
+| 00 | Project Overview |
+| 01 | PRD |
+| 02 | MVP Spec |
+| 03 | Architecture |
+| 04 | Data Spec |
+| 05 | API Spec |
+| 06 | DB Schema |
+| 07 | Frontend Spec |
+| 08 | Backend Spec |
+| 09 | 7-Month Dev Plan |
+| 10 | Test Plan |
+| 11 | Risks & Decisions |
+| 12 | Pitch One-Pager |
 
 ## License
 

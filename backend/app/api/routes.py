@@ -1,5 +1,8 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, Depends, HTTPException
+from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.api.middleware import rate_limit, verify_api_key
+from app.database import get_db
 from app.models.schemas import (
     DispatchJobInput,
     DispatchRiskResult,
@@ -25,17 +28,28 @@ SUPPORTED_TERMINALS = [
 VALID_TERMINAL_CODES = {t.terminal_code for t in SUPPORTED_TERMINALS}
 
 
-@router.post("/risk/evaluate", response_model=DispatchRiskResult)
-async def risk_evaluate(job: DispatchJobInput) -> DispatchRiskResult:
+@router.post(
+    "/risk/evaluate",
+    response_model=DispatchRiskResult,
+    dependencies=[Depends(rate_limit), Depends(verify_api_key)],
+)
+async def risk_evaluate(
+    job: DispatchJobInput,
+    db: AsyncSession = Depends(get_db),
+) -> DispatchRiskResult:
     if job.terminal_code not in VALID_TERMINAL_CODES:
         raise HTTPException(
             status_code=422,
             detail=f"Unsupported terminal: {job.terminal_code}. Supported: {sorted(VALID_TERMINAL_CODES)}",
         )
-    return await evaluate_dispatch(job)
+    return await evaluate_dispatch(job, db=db)
 
 
-@router.post("/risk/simulate", response_model=SimulationResult)
+@router.post(
+    "/risk/simulate",
+    response_model=SimulationResult,
+    dependencies=[Depends(rate_limit), Depends(verify_api_key)],
+)
 async def risk_simulate(sim: SimulationInput) -> SimulationResult:
     if sim.terminal_code not in VALID_TERMINAL_CODES:
         raise HTTPException(

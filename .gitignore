@@ -12,6 +12,7 @@ backend/.env
 
 # Build
 frontend/dist/
+site/
 backend/*.egg-info/
 
 # IDE

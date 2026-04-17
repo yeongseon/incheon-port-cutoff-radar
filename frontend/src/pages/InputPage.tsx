@@ -56,6 +56,11 @@ export function InputPage() {
             <h1 className="text-2xl font-bold text-slate-800">Cut-off Risk Radar</h1>
           </div>
           <p className="text-slate-500">Incheon Port — Inbound Dispatch Risk Assessment</p>
+          {import.meta.env.VITE_DEMO_MODE === 'true' && (
+            <span className="inline-block mt-2 px-3 py-1 bg-amber-100 text-amber-800 text-xs font-medium rounded-full border border-amber-300">
+              Demo Mode — using simulated data
+            </span>
+          )}
         </div>
 
         <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-lg p-6 space-y-5">
