@@ -1,3 +1,5 @@
+"""배차 평가 서비스 — 데이터 수집, 엔진 호출, 결과 저장을 조율합니다."""
+
 from __future__ import annotations
 
 import uuid
@@ -32,6 +34,7 @@ from app.repositories.dispatch_repo import save_evaluation
 async def _fetch_snapshots(
     origin_zone_id: str, terminal_code: str
 ) -> tuple[dict[str, Any], list[SourceFreshness], list[Warning]]:
+    """캐시에서 각 데이터 소스의 최신 스냅샷을 가져옵니다."""
     sources: dict[str, Any] = {}
     freshness_list: list[SourceFreshness] = []
     warnings: list[Warning] = []
@@ -69,7 +72,7 @@ async def _fetch_snapshots(
             warnings.append(
                 Warning(
                     code="SOURCE_UNAVAILABLE",
-                    message=f"{source_name} data is currently unavailable. Using fallback defaults.",
+                    message=f"{source_name} 데이터를 현재 사용할 수 없습니다. 기본값으로 대체합니다.",
                     affected_source=source_name,
                 )
             )
@@ -78,6 +81,7 @@ async def _fetch_snapshots(
 
 
 def _has_critical_failure(sources: dict[str, Any]) -> bool:
+    """교통과 터미널 혼잡도 데이터가 모두 없으면 치명적 실패로 판단합니다."""
     return sources.get("traffic") is None and sources.get("terminal_congestion") is None
 
 
@@ -89,6 +93,7 @@ async def _persist_evaluation(
     engine_result: dict[str, Any],
     now: datetime,
 ) -> None:
+    """평가 결과를 DB에 저장합니다."""
     if db is None:
         return
     try:
@@ -141,6 +146,7 @@ async def _persist_evaluation(
 async def evaluate_dispatch(
     job: DispatchJobInput, db: AsyncSession | None = None
 ) -> DispatchRiskResult:
+    """단일 반입 작업에 대한 리스크 평가를 수행합니다."""
     now = datetime.now(timezone.utc)
     eval_id = str(uuid.uuid4())
     sources, freshness_list, warnings = await _fetch_snapshots(
@@ -156,7 +162,7 @@ async def evaluate_dispatch(
             on_time_probability=0.0,
             latest_safe_dispatch_at=None,
             estimated_total_minutes=0,
-            verdict="Unable to evaluate — critical data sources unavailable.",
+            verdict="평가 불가 — 핵심 데이터 소스를 사용할 수 없습니다.",
             reason_items=[],
             source_freshness=freshness_list,
             warnings=warnings,
@@ -202,6 +208,7 @@ async def evaluate_dispatch(
 
 
 async def simulate_dispatch(sim: SimulationInput) -> SimulationResult:
+    """출발 시각별 what-if 시뮬레이션을 수행합니다."""
     now = datetime.now(timezone.utc)
     sources, freshness_list, warnings = await _fetch_snapshots(
         sim.origin_zone_id, sim.terminal_code

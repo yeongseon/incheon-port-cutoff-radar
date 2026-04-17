@@ -17,7 +17,7 @@ async def lifespan(application: FastAPI):
     try:
         await ingest_all_sources()
     except Exception as e:
-        logger.warning("Initial ingestion failed: %s", e)
+        logger.warning("초기 데이터 수집 실패: %s", e)
 
     ingestion_task = asyncio.create_task(_periodic_ingestion())
     yield
@@ -34,13 +34,13 @@ async def _periodic_ingestion() -> None:
         try:
             await ingest_all_sources()
         except Exception as e:
-            logger.warning("Periodic ingestion failed: %s", e)
+            logger.warning("주기적 데이터 수집 실패: %s", e)
 
 
 app = FastAPI(
-    title="Incheon Port Cut-off Risk Radar",
+    title="인천항 Cut-off 리스크 레이더",
     version="0.1.0",
-    description="Decision-support API for inbound container cut-off risk at Incheon Port",
+    description="인천항 반입 컨테이너의 cut-off 리스크를 평가하는 의사결정 지원 API",
     lifespan=lifespan,
 )
 

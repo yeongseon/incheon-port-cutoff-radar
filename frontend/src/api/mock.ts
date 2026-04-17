@@ -22,35 +22,35 @@ function buildMockReasons(): ReasonItem[] {
   return [
     {
       code: 'TRAFFIC',
-      label: 'Road traffic',
+      label: '도로 교통',
       contribution_percent: Math.round((travel / total) * 100),
       impact_minutes: travel,
       direction: 'increase',
-      summary: `Road travel time estimated at ${travel.toFixed(0)} min based on current traffic conditions.`,
+      summary: `현재 교통 상황 기준 도로 이동시간 약 ${travel.toFixed(0)}분 소요 예상.`,
     },
     {
       code: 'TERMINAL_CONGESTION',
-      label: 'Terminal congestion',
+      label: '터미널 혼잡',
       contribution_percent: Math.round((terminal / total) * 100),
       impact_minutes: terminal,
       direction: 'increase',
-      summary: `Terminal wait time estimated at ${terminal.toFixed(0)} min due to current congestion level.`,
+      summary: `현재 혼잡도 기준 터미널 대기시간 약 ${terminal.toFixed(0)}분 예상.`,
     },
     {
       code: 'GATE_FLOW',
-      label: 'Gate entry flow',
+      label: '게이트 진입',
       contribution_percent: Math.round((gate / total) * 100),
       impact_minutes: gate,
       direction: 'increase',
-      summary: `Gate entry adjustment adds ${gate.toFixed(0)} min based on vehicle queue.`,
+      summary: `대기 차량 수 기준 게이트 진입 지연 약 ${gate.toFixed(0)}분 예상.`,
     },
     {
       code: 'BUFFER',
-      label: 'Safety buffer',
+      label: '안전 버퍼',
       contribution_percent: Math.round((buffer / total) * 100),
       impact_minutes: buffer,
       direction: 'increase',
-      summary: `Safety buffer of ${buffer.toFixed(0)} min applied for operational uncertainty.`,
+      summary: `운영 불확실성 대비 안전 버퍼 ${buffer.toFixed(0)}분 적용.`,
     },
   ];
 }
@@ -103,9 +103,9 @@ function computeMockResult(input: DispatchJobInput, dispatchOffset: number = 0):
   const latestSafe = new Date(cutoff.getTime() - totalMinutes * 60000);
 
   let verdict: string;
-  if (risk_score <= 34) verdict = 'Safe to dispatch now.';
-  else if (risk_score <= 69) verdict = 'Dispatch is possible but tight. Consider dispatching earlier.';
-  else verdict = 'High risk of missing cut-off. Dispatch immediately or reschedule.';
+  if (risk_score <= 34) verdict = '지금 출발해도 안전합니다.';
+  else if (risk_score <= 69) verdict = '배차 가능하지만 여유가 부족합니다. 조기 출발을 권장합니다.';
+  else verdict = 'Cut-off 초과 위험이 높습니다. 즉시 출발하거나 일정을 재조정하세요.';
 
   return {
     risk_score,

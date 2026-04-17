@@ -1,4 +1,4 @@
-"""Pydantic schemas for API request/response contracts."""
+"""API 요청/응답 계약을 위한 Pydantic 스키마."""
 
 from __future__ import annotations
 
@@ -28,13 +28,13 @@ class FreshnessStatus(str, Enum):
 
 
 class DispatchJobInput(BaseModel):
-    origin_zone_id: str = Field(
-        ..., description="Origin zone identifier (e.g., 'SONGDO', 'NAMDONG')"
+    origin_zone_id: str = Field(..., description="출발 지역 식별자 (예: 'SONGDO', 'NAMDONG')")
+    terminal_code: str = Field(..., description="도착 터미널 코드")
+    cut_off_at: datetime = Field(..., description="Gate-in cut-off 시간 (Asia/Seoul)")
+    conservative_mode: bool = Field(default=False, description="보수적 모드 활성화 여부")
+    manual_buffer_minutes: int | None = Field(
+        default=None, ge=0, le=120, description="수동 버퍼 시간 (분)"
     )
-    terminal_code: str = Field(..., description="Destination terminal code")
-    cut_off_at: datetime = Field(..., description="Gate-in cut-off time (Asia/Seoul)")
-    conservative_mode: bool = Field(default=False)
-    manual_buffer_minutes: int | None = Field(default=None, ge=0, le=120)
 
 
 class SimulationInput(BaseModel):
@@ -43,7 +43,7 @@ class SimulationInput(BaseModel):
     cut_off_at: datetime
     scenario_offsets_minutes: list[int] = Field(
         default=[0, -15, -30, -60],
-        description="Dispatch time offsets in minutes (negative = earlier)",
+        description="출발 시각 오프셋 (분 단위, 음수 = 조기 출발)",
     )
 
 
@@ -52,7 +52,7 @@ class ReasonItem(BaseModel):
     label: str
     contribution_percent: int = Field(ge=0, le=100)
     impact_minutes: float
-    direction: str = Field(description="'increase' or 'decrease'")
+    direction: str = Field(description="'increase' 또는 'decrease'")
     summary: str
 
 
@@ -72,12 +72,12 @@ class Warning(BaseModel):
 class DispatchRiskResult(BaseModel):
     evaluation_id: str
     result_status: ResultStatus
-    risk_score: int = Field(ge=0, le=100)
+    risk_score: int = Field(ge=0, le=100, description="리스크 점수 (0~100)")
     risk_level: RiskLevel
-    on_time_probability: float = Field(ge=0.0, le=1.0)
-    latest_safe_dispatch_at: datetime | None
-    estimated_total_minutes: int
-    verdict: str
+    on_time_probability: float = Field(ge=0.0, le=1.0, description="정시 도착 확률 (0~1)")
+    latest_safe_dispatch_at: datetime | None = Field(description="최늦 안전 출발 시각")
+    estimated_total_minutes: int = Field(description="예상 총 소요시간 (분)")
+    verdict: str = Field(description="종합 판단 문구")
     reason_items: list[ReasonItem]
     source_freshness: list[SourceFreshness]
     warnings: list[Warning] = Field(default_factory=list)

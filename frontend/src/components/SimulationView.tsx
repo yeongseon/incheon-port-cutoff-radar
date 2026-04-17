@@ -26,14 +26,14 @@ export function SimulationView({ jobInput }: Props) {
       .finally(() => setLoading(false));
   }, [jobInput]);
 
-  if (loading) return <div className="text-center py-8 text-slate-400">Loading simulation...</div>;
-  if (error) return <div className="text-center py-8 text-red-500">Simulation failed: {error}</div>;
+  if (loading) return <div className="text-center py-8 text-slate-400">시뮬레이션 로딩 중...</div>;
+  if (error) return <div className="text-center py-8 text-red-500">시뮬레이션 실패: {error}</div>;
   if (!result) return null;
 
   const chartData = result.scenarios.map((s) => ({
-    label: s.offset_minutes === 0 ? 'Now' : `${s.offset_minutes} min`,
-    probability: Math.round(s.on_time_probability * 100),
-    risk: s.risk_score,
+    label: s.offset_minutes === 0 ? '현재' : `${s.offset_minutes}분`,
+    '정시 확률': Math.round(s.on_time_probability * 100),
+    '리스크 점수': s.risk_score,
   }));
 
   return (
@@ -45,8 +45,8 @@ export function SimulationView({ jobInput }: Props) {
             <YAxis domain={[0, 100]} />
             <Tooltip />
             <Legend />
-            <Bar dataKey="probability" name="On-time %" fill="#3b82f6" radius={[4, 4, 0, 0]} />
-            <Bar dataKey="risk" name="Risk Score" fill="#ef4444" radius={[4, 4, 0, 0]} />
+            <Bar dataKey="정시 확률" fill="#3b82f6" radius={[4, 4, 0, 0]} />
+            <Bar dataKey="리스크 점수" fill="#ef4444" radius={[4, 4, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
       </div>
@@ -55,18 +55,18 @@ export function SimulationView({ jobInput }: Props) {
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-slate-200 text-left text-slate-500">
-              <th className="py-2 px-3">Dispatch</th>
-              <th className="py-2 px-3">On-time</th>
-              <th className="py-2 px-3">Risk</th>
-              <th className="py-2 px-3">Level</th>
-              <th className="py-2 px-3">Verdict</th>
+              <th className="py-2 px-3">출발 시점</th>
+              <th className="py-2 px-3">정시 확률</th>
+              <th className="py-2 px-3">리스크</th>
+              <th className="py-2 px-3">등급</th>
+              <th className="py-2 px-3">판단</th>
             </tr>
           </thead>
           <tbody>
             {result.scenarios.map((s) => (
               <tr key={s.offset_minutes} className="border-b border-slate-100">
                 <td className="py-2 px-3 font-medium">
-                  {s.offset_minutes === 0 ? 'Now' : `${s.offset_minutes} min`}
+                  {s.offset_minutes === 0 ? '현재' : `${s.offset_minutes}분`}
                 </td>
                 <td className="py-2 px-3">{Math.round(s.on_time_probability * 100)}%</td>
                 <td className="py-2 px-3">{s.risk_score}</td>

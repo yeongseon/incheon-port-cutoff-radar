@@ -77,19 +77,19 @@ export interface TerminalInfo {
 }
 
 export const ORIGIN_ZONES = [
-  { id: 'SONGDO', label: 'Songdo' },
-  { id: 'NAMDONG', label: 'Namdong' },
-  { id: 'SEOGU', label: 'Seo-gu' },
-  { id: 'YEONSU', label: 'Yeonsu' },
-  { id: 'BUPYEONG', label: 'Bupyeong' },
-  { id: 'SIHEUNG', label: 'Siheung' },
-  { id: 'ANSAN', label: 'Ansan' },
+  { id: 'SONGDO', label: '송도' },
+  { id: 'NAMDONG', label: '남동' },
+  { id: 'SEOGU', label: '서구' },
+  { id: 'YEONSU', label: '연수' },
+  { id: 'BUPYEONG', label: '부평' },
+  { id: 'SIHEUNG', label: '시흥' },
+  { id: 'ANSAN', label: '안산' },
 ] as const;
 
 export const TERMINALS = [
-  { code: 'ICT', name: 'Incheon Container Terminal' },
-  { code: 'E1', name: 'E1 Container Terminal' },
-  { code: 'SNCT', name: 'Sun Kwang New Container Terminal' },
-  { code: 'HJIT', name: 'Hanjin Incheon Terminal' },
-  { code: 'SGT', name: 'Sungmin Terminal' },
+  { code: 'ICT', name: '인천컨테이너터미널' },
+  { code: 'E1', name: 'E1컨테이너터미널' },
+  { code: 'SNCT', name: '선광신컨테이너터미널' },
+  { code: 'HJIT', name: '한진인천터미널' },
+  { code: 'SGT', name: '성민터미널' },
 ] as const;

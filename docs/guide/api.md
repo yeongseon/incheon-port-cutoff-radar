@@ -1,24 +1,24 @@
-# API Reference
+# API 참조
 
-## Base URL
+## 기본 URL
 
 ```
 http://localhost:8000/api/v1
 ```
 
-## Authentication
+## 인증
 
-API key 인증 (선택적). `X-API-Key` 헤더로 전달.
+API 키 인증 (선택적). `X-API-Key` 헤더로 전달.
 
 ```bash
 curl -H "X-API-Key: your-key" http://localhost:8000/api/v1/health
 ```
 
-API key가 설정되지 않은 경우 인증 없이 접근 가능.
+API 키가 설정되지 않은 경우 인증 없이 접근 가능.
 
-## Rate Limiting
+## 요청 제한
 
-IP 기반 60 requests/minute.
+IP 기반 분당 60회 요청.
 
 ---
 
@@ -26,7 +26,7 @@ IP 기반 60 requests/minute.
 
 단일 반입 작업의 리스크를 평가합니다.
 
-### Request
+### 요청
 
 ```json
 {
@@ -38,7 +38,7 @@ IP 기반 60 requests/minute.
 }
 ```
 
-### Response
+### 응답
 
 ```json
 {
@@ -50,9 +50,9 @@ IP 기반 60 requests/minute.
   "reason_items": [
     {
       "code": "TRAFFIC",
-      "label": "Road traffic",
+      "label": "도로 교통",
       "contribution_percent": 38,
-      "summary": "Road travel time is elevated."
+      "summary": "도로 교통 요인으로 이동 시간이 증가했습니다."
     }
   ],
   "data_freshness": [
@@ -67,14 +67,14 @@ IP 기반 60 requests/minute.
 }
 ```
 
-### Fields
+### 필드 설명
 
-| Field | Type | Description |
-|-------|------|-------------|
+| 필드 | 타입 | 설명 |
+|------|------|------|
 | `risk_score` | int | 0-100 리스크 점수 |
 | `risk_level` | string | LOW / MEDIUM / HIGH |
 | `on_time_probability` | float | 정시 도착 확률 (0-1) |
-| `latest_safe_dispatch_at` | datetime | 최적 출발 시각 |
+| `latest_safe_dispatch_at` | datetime | 최늦 안전 출발 시각 |
 | `result_status` | string | FULL / DEGRADED / FAILED |
 
 ---
@@ -83,7 +83,7 @@ IP 기반 60 requests/minute.
 
 출발 시각별 what-if 시뮬레이션을 실행합니다.
 
-### Request
+### 요청
 
 ```json
 {
@@ -94,7 +94,7 @@ IP 기반 60 requests/minute.
 }
 ```
 
-### Response
+### 응답
 
 ```json
 {
@@ -121,15 +121,15 @@ IP 기반 60 requests/minute.
 
 지원하는 인천항 터미널 목록을 반환합니다.
 
-### Response
+### 응답
 
 ```json
 [
-  {"code": "ICT", "name": "Incheon Container Terminal"},
-  {"code": "E1", "name": "E1 Container Terminal"},
-  {"code": "SNCT", "name": "Sun Kwang New Container Terminal"},
-  {"code": "HJIT", "name": "Hanjin Incheon Terminal"},
-  {"code": "SGT", "name": "Sungmin Terminal"}
+  {"code": "ICT", "name": "인천컨테이너터미널"},
+  {"code": "E1", "name": "E1컨테이너터미널"},
+  {"code": "SNCT", "name": "선광신컨테이너터미널"},
+  {"code": "HJIT", "name": "한진인천터미널"},
+  {"code": "SGT", "name": "성민터미널"}
 ]
 ```
 
@@ -137,9 +137,9 @@ IP 기반 60 requests/minute.
 
 ## GET /health
 
-헬스 체크 엔드포인트.
+상태 확인 엔드포인트.
 
-### Response
+### 응답
 
 ```json
 {

@@ -1,3 +1,9 @@
+const LEVEL_LABELS: Record<string, string> = {
+  LOW: '낮음',
+  MEDIUM: '보통',
+  HIGH: '높음',
+};
+
 export function RiskBadge({ level }: { level: 'LOW' | 'MEDIUM' | 'HIGH' }) {
   const styles: Record<string, string> = {
     LOW: 'bg-green-100 text-green-800 border-green-300',
@@ -7,7 +13,7 @@ export function RiskBadge({ level }: { level: 'LOW' | 'MEDIUM' | 'HIGH' }) {
 
   return (
     <span className={`inline-block px-3 py-1 rounded-full text-sm font-semibold border ${styles[level]}`}>
-      {level}
+      {LEVEL_LABELS[level] ?? level}
     </span>
   );
 }
