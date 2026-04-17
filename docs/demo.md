@@ -3,14 +3,14 @@
 Mock 데이터 기반으로 동작하는 데모 앱입니다.
 
 <div style="margin-top: 1rem;">
-  <a href="./demo/" target="_blank" class="md-button md-button--primary">
+  <a href="../app/" target="_blank" class="md-button md-button--primary">
     데모 앱 열기 →
   </a>
 </div>
 
 <div style="margin-top: 2rem;">
   <iframe
-    src="./demo/"
+    src="../app/"
     width="100%"
     height="700"
     style="border: 1px solid #e0e0e0; border-radius: 8px;"

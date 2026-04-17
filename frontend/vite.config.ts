@@ -4,7 +4,7 @@ import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig(({ mode }) => ({
   plugins: [react(), tailwindcss()],
-  base: mode === 'demo' ? '/incheon-port-cutoff-radar/demo/' : '/',
+  base: mode === 'demo' ? '/incheon-port-cutoff-radar/app/' : '/',
   define: {
     'import.meta.env.VITE_DEMO_MODE': JSON.stringify(mode === 'demo' ? 'true' : 'false'),
   },

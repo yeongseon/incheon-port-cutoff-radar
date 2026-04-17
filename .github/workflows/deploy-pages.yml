@@ -45,7 +45,7 @@ jobs:
         run: npm run build:demo
 
       - name: Copy frontend demo into MkDocs site
-        run: cp -r frontend/dist site/demo
+        run: cp -r frontend/dist site/app
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
