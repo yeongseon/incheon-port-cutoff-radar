@@ -1,7 +1,7 @@
 const LEVEL_LABELS: Record<string, string> = {
-  LOW: '낮음',
-  MEDIUM: '보통',
-  HIGH: '높음',
+  LOW: '✅ 낮음',
+  MEDIUM: '⚠️ 보통',
+  HIGH: '🔴 높음',
 };
 
 export function RiskBadge({ level }: { level: 'LOW' | 'MEDIUM' | 'HIGH' }) {

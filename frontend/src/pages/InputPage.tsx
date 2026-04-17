@@ -53,19 +53,19 @@ export function InputPage() {
             <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
               <span className="text-white text-xl">⚓</span>
             </div>
-            <h1 className="text-2xl font-bold text-slate-800">Cut-off 리스크 레이더</h1>
+            <h1 className="text-2xl font-bold text-slate-800">⚓ Cut-off 리스크 레이더</h1>
           </div>
-          <p className="text-slate-500">인천항 — 반입 배차 리스크 평가</p>
+          <p className="text-slate-500">🚢 인천항 — 반입 배차 리스크 평가</p>
           {import.meta.env.VITE_DEMO_MODE === 'true' && (
             <span className="inline-block mt-2 px-3 py-1 bg-amber-100 text-amber-800 text-xs font-medium rounded-full border border-amber-300">
-              데모 모드 — 시뮬레이션 데이터 사용 중
+              🧪 데모 모드 — 시뮬레이션 데이터 사용 중
             </span>
           )}
         </div>
 
         <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-lg p-6 space-y-5">
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">출발 지역</label>
+            <label className="block text-sm font-medium text-slate-700 mb-1">📍 출발 지역</label>
             <select
               value={origin}
               onChange={(e) => setOrigin(e.target.value)}
@@ -78,7 +78,7 @@ export function InputPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">도착 터미널</label>
+            <label className="block text-sm font-medium text-slate-700 mb-1">🏗️ 도착 터미널</label>
             <select
               value={terminal}
               onChange={(e) => setTerminal(e.target.value)}
@@ -91,7 +91,7 @@ export function InputPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">Cut-off 시간</label>
+            <label className="block text-sm font-medium text-slate-700 mb-1">⏰ Cut-off 시간</label>
             <input
               type="datetime-local"
               value={cutoff}
@@ -102,7 +102,7 @@ export function InputPage() {
           </div>
 
           <div className="flex items-center justify-between">
-            <label className="text-sm font-medium text-slate-700">보수적 모드</label>
+            <label className="text-sm font-medium text-slate-700">🛡️ 보수적 모드</label>
             <button
               type="button"
               onClick={() => setConservative(!conservative)}
@@ -120,7 +120,7 @@ export function InputPage() {
 
           <div>
             <label className="block text-sm font-medium text-slate-700 mb-1">
-              수동 버퍼 (분, 선택사항)
+              ⏱️ 수동 버퍼 (분, 선택사항)
             </label>
             <input
               type="number"
@@ -135,7 +135,7 @@ export function InputPage() {
 
           {error && (
             <div className="bg-red-50 border border-red-200 text-red-700 rounded-lg px-4 py-3 text-sm">
-              {error}
+              ❌ {error}
             </div>
           )}
 
@@ -144,7 +144,7 @@ export function InputPage() {
             disabled={loading}
             className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-300 text-white font-semibold rounded-lg py-3 transition-colors"
           >
-            {loading ? '평가 중...' : '리스크 평가'}
+            {loading ? '⏳ 평가 중...' : '🔍 리스크 평가'}
           </button>
         </form>
       </div>

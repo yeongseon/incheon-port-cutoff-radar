@@ -26,14 +26,14 @@ export function SimulationView({ jobInput }: Props) {
       .finally(() => setLoading(false));
   }, [jobInput]);
 
-  if (loading) return <div className="text-center py-8 text-slate-400">시뮬레이션 로딩 중...</div>;
-  if (error) return <div className="text-center py-8 text-red-500">시뮬레이션 실패: {error}</div>;
+  if (loading) return <div className="text-center py-8 text-slate-400">⏳ 시뮬레이션 로딩 중...</div>;
+  if (error) return <div className="text-center py-8 text-red-500">❌ 시뮬레이션 실패: {error}</div>;
   if (!result) return null;
 
   const chartData = result.scenarios.map((s) => ({
     label: s.offset_minutes === 0 ? '현재' : `${s.offset_minutes}분`,
-    '정시 확률': Math.round(s.on_time_probability * 100),
-    '리스크 점수': s.risk_score,
+    '🎯 정시 확률': Math.round(s.on_time_probability * 100),
+    '📊 리스크': s.risk_score,
   }));
 
   return (
@@ -45,8 +45,8 @@ export function SimulationView({ jobInput }: Props) {
             <YAxis domain={[0, 100]} />
             <Tooltip />
             <Legend />
-            <Bar dataKey="정시 확률" fill="#3b82f6" radius={[4, 4, 0, 0]} />
-            <Bar dataKey="리스크 점수" fill="#ef4444" radius={[4, 4, 0, 0]} />
+            <Bar dataKey="🎯 정시 확률" fill="#3b82f6" radius={[4, 4, 0, 0]} />
+            <Bar dataKey="📊 리스크" fill="#ef4444" radius={[4, 4, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
       </div>
@@ -55,11 +55,11 @@ export function SimulationView({ jobInput }: Props) {
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-slate-200 text-left text-slate-500">
-              <th className="py-2 px-3">출발 시점</th>
-              <th className="py-2 px-3">정시 확률</th>
-              <th className="py-2 px-3">리스크</th>
-              <th className="py-2 px-3">등급</th>
-              <th className="py-2 px-3">판단</th>
+              <th className="py-2 px-3">🕐 출발 시점</th>
+              <th className="py-2 px-3">🎯 정시 확률</th>
+              <th className="py-2 px-3">📊 리스크</th>
+              <th className="py-2 px-3">🏷️ 등급</th>
+              <th className="py-2 px-3">📋 판단</th>
             </tr>
           </thead>
           <tbody>

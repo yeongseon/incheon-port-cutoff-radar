@@ -1,12 +1,19 @@
 import type { ReasonItem } from '../types';
 
+const CODE_ICONS: Record<string, string> = {
+  TRAFFIC: '🚗',
+  TERMINAL_CONGESTION: '🏗️',
+  GATE_FLOW: '🚧',
+  BUFFER: '🛡️',
+};
+
 export function ReasonCards({ reasons }: { reasons: ReasonItem[] }) {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
       {reasons.map((r) => (
         <div key={r.code} className="bg-slate-50 rounded-lg p-4 border border-slate-200">
           <div className="flex items-center justify-between mb-1">
-            <span className="font-medium text-slate-800">{r.label}</span>
+            <span className="font-medium text-slate-800">{CODE_ICONS[r.code] ?? '📌'} {r.label}</span>
             <span className="text-sm text-blue-600 font-semibold">+{r.impact_minutes.toFixed(0)}분</span>
           </div>
           <p className="text-sm text-slate-500">{r.summary}</p>

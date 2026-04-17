@@ -8,17 +8,17 @@ const STATUS_COLORS: Record<string, string> = {
 };
 
 const STATUS_LABELS: Record<string, string> = {
-  LIVE: '실시간',
-  CACHED: '캐시',
-  STALE: '오래됨',
-  UNAVAILABLE: '사용불가',
+  LIVE: '🟢 실시간',
+  CACHED: '🟡 캐시',
+  STALE: '🟠 오래됨',
+  UNAVAILABLE: '🔴 사용불가',
 };
 
 const SOURCE_LABELS: Record<string, string> = {
-  terminal_congestion: '터미널 혼잡도',
-  terminal_operation: '터미널 운영',
-  gate_entry: '게이트 진입',
-  traffic: '교통',
+  terminal_congestion: '🏗️ 터미널 혼잡도',
+  terminal_operation: '⚙️ 터미널 운영',
+  gate_entry: '🚧 게이트 진입',
+  traffic: '🚗 교통',
 };
 
 export function FreshnessIndicator({ items }: { items: SourceFreshness[] }) {

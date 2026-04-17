@@ -1,12 +1,12 @@
-# API 참조
+# 📡 API 참조
 
-## 기본 URL
+## 🌐 기본 URL
 
 ```
 http://localhost:8000/api/v1
 ```
 
-## 인증
+## 🔐 인증
 
 API 키 인증 (선택적). `X-API-Key` 헤더로 전달.
 
@@ -16,17 +16,17 @@ curl -H "X-API-Key: your-key" http://localhost:8000/api/v1/health
 
 API 키가 설정되지 않은 경우 인증 없이 접근 가능.
 
-## 요청 제한
+## ⏱️ 요청 제한
 
 IP 기반 분당 60회 요청.
 
 ---
 
-## POST /risk/evaluate
+## 🔍 POST /risk/evaluate
 
 단일 반입 작업의 리스크를 평가합니다.
 
-### 요청
+### 📤 요청
 
 ```json
 {
@@ -38,7 +38,7 @@ IP 기반 분당 60회 요청.
 }
 ```
 
-### 응답
+### 📥 응답
 
 ```json
 {
@@ -67,23 +67,23 @@ IP 기반 분당 60회 요청.
 }
 ```
 
-### 필드 설명
+### 📋 필드 설명
 
 | 필드 | 타입 | 설명 |
 |------|------|------|
-| `risk_score` | int | 0-100 리스크 점수 |
-| `risk_level` | string | LOW / MEDIUM / HIGH |
-| `on_time_probability` | float | 정시 도착 확률 (0-1) |
-| `latest_safe_dispatch_at` | datetime | 최늦 안전 출발 시각 |
-| `result_status` | string | FULL / DEGRADED / FAILED |
+| `risk_score` | int | 📊 0-100 리스크 점수 |
+| `risk_level` | string | 🏷️ LOW / MEDIUM / HIGH |
+| `on_time_probability` | float | 🎯 정시 도착 확률 (0-1) |
+| `latest_safe_dispatch_at` | datetime | 🕐 최늦 안전 출발 시각 |
+| `result_status` | string | ✅ FULL / ⚠️ DEGRADED / ❌ FAILED |
 
 ---
 
-## POST /risk/simulate
+## 📈 POST /risk/simulate
 
 출발 시각별 what-if 시뮬레이션을 실행합니다.
 
-### 요청
+### 📤 요청
 
 ```json
 {
@@ -94,7 +94,7 @@ IP 기반 분당 60회 요청.
 }
 ```
 
-### 응답
+### 📥 응답
 
 ```json
 {
@@ -117,11 +117,11 @@ IP 기반 분당 60회 요청.
 
 ---
 
-## GET /terminals
+## 🏗️ GET /terminals
 
 지원하는 인천항 터미널 목록을 반환합니다.
 
-### 응답
+### 📥 응답
 
 ```json
 [
@@ -135,11 +135,11 @@ IP 기반 분당 60회 요청.
 
 ---
 
-## GET /health
+## 💚 GET /health
 
 상태 확인 엔드포인트.
 
-### 응답
+### 📥 응답
 
 ```json
 {
