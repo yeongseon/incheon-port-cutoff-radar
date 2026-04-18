@@ -15,6 +15,7 @@ export function SimulationView({ jobInput }: Props) {
 
   useEffect(() => {
     setLoading(true);
+    setError(null);
     simulateRisk({
       origin_zone_id: jobInput.origin_zone_id,
       terminal_code: jobInput.terminal_code,
@@ -26,7 +27,26 @@ export function SimulationView({ jobInput }: Props) {
       .finally(() => setLoading(false));
   }, [jobInput]);
 
-  if (loading) return <div className="text-center py-8 text-slate-400">⏳ 시뮬레이션 로딩 중...</div>;
+  if (loading) {
+    return (
+      <div className="space-y-4 animate-fade-in">
+        <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+          <div className="simulation-skeleton h-56 rounded-xl" />
+        </div>
+        <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+          <div className="space-y-3 p-4">
+            {[1, 2, 3, 4].map((row) => (
+              <div key={row} className="grid grid-cols-5 gap-3">
+                {Array.from({ length: 5 }).map((_, cell) => (
+                  <div key={cell} className="simulation-skeleton h-10 rounded-lg" />
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
   if (error) return <div className="text-center py-8 text-red-500">❌ 시뮬레이션 실패: {error}</div>;
   if (!result) return null;
 
@@ -38,7 +58,7 @@ export function SimulationView({ jobInput }: Props) {
 
   return (
     <div className="space-y-4">
-      <div className="w-full h-56">
+      <div className="h-56 w-full overflow-hidden rounded-2xl border border-slate-200 bg-white p-3 shadow-sm">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={chartData}>
             <XAxis dataKey="label" />
@@ -51,27 +71,30 @@ export function SimulationView({ jobInput }: Props) {
         </ResponsiveContainer>
       </div>
 
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-slate-200 text-left text-slate-500">
-              <th className="py-2 px-3">🕐 출발 시점</th>
-              <th className="py-2 px-3">🎯 정시 확률</th>
-              <th className="py-2 px-3">📊 리스크</th>
-              <th className="py-2 px-3">🏷️ 등급</th>
-              <th className="py-2 px-3">📋 판단</th>
+            <tr className="border-b border-slate-200 bg-slate-50/80 text-left text-slate-500">
+              <th className="px-4 py-3">🕐 출발 시점</th>
+              <th className="px-4 py-3">🎯 정시 확률</th>
+              <th className="px-4 py-3">📊 리스크</th>
+              <th className="px-4 py-3">🏷️ 등급</th>
+              <th className="px-4 py-3">📋 판단</th>
             </tr>
           </thead>
           <tbody>
-            {result.scenarios.map((s) => (
-              <tr key={s.offset_minutes} className="border-b border-slate-100">
-                <td className="py-2 px-3 font-medium">
+            {result.scenarios.map((s, index) => (
+              <tr
+                key={s.offset_minutes}
+                className={`border-b border-slate-100 transition-colors hover:bg-blue-50/60 ${index % 2 === 0 ? 'bg-white' : 'bg-slate-50/50'}`}
+              >
+                <td className="px-4 py-3 font-medium">
                   {s.offset_minutes === 0 ? '현재' : `${s.offset_minutes}분`}
                 </td>
-                <td className="py-2 px-3">{Math.round(s.on_time_probability * 100)}%</td>
-                <td className="py-2 px-3">{s.risk_score}</td>
-                <td className="py-2 px-3"><RiskBadge level={s.risk_level} /></td>
-                <td className="py-2 px-3 text-slate-600">{s.verdict}</td>
+                <td className="px-4 py-3">{Math.round(s.on_time_probability * 100)}%</td>
+                <td className="px-4 py-3">{s.risk_score}</td>
+                <td className="px-4 py-3"><RiskBadge level={s.risk_level} /></td>
+                <td className="px-4 py-3 text-slate-600">{s.verdict}</td>
               </tr>
             ))}
           </tbody>

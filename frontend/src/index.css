@@ -1,12 +1,113 @@
 @import "tailwindcss";
 
+@theme {
+  --font-display: "Noto Serif KR", "Nanum Myeongjo", Georgia, serif;
+  --font-body: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+}
+
+@keyframes softPulse {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.22);
+  }
+  50% {
+    transform: scale(1.03);
+    box-shadow: 0 0 0 8px rgba(239, 68, 68, 0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes buttonRing {
+  0% {
+    opacity: 0.75;
+    transform: scale(0.84);
+  }
+  70%,
+  100% {
+    opacity: 0;
+    transform: scale(1.22);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
+
 body {
   margin: 0;
-  background-color: #f1f5f9;
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: #e2e8f0;
+  background-image: radial-gradient(circle at top, rgba(255, 255, 255, 0.75), transparent 42%), linear-gradient(180deg, rgba(248, 250, 252, 0.96), rgba(226, 232, 240, 0.95));
+  font-family: var(--font-body);
   color: #1e293b;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 #root {
   min-height: 100vh;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out both;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.65s ease-out both;
+}
+
+.risk-badge-pulse {
+  animation: softPulse 1.9s ease-in-out infinite;
+}
+
+.status-live-pulse {
+  animation: softPulse 1.7s ease-in-out infinite;
+}
+
+.button-ring {
+  animation: buttonRing 1.4s ease-out infinite;
+}
+
+.simulation-skeleton {
+  background: linear-gradient(90deg, rgba(226, 232, 240, 0.8) 0%, rgba(248, 250, 252, 1) 50%, rgba(226, 232, 240, 0.8) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s linear infinite;
 }
