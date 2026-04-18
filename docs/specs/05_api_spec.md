@@ -1,7 +1,7 @@
-# 🔌 내부 API 명세서
-## 🚢 인천항 반입 Cut-off 리스크 레이더
+# 내부 API 명세서
+## 인천항 반입 Cut-off 리스크 레이더
 
-## 1. 📮 POST /api/v1/risk/evaluate
+## 1. POST /api/v1/risk/evaluate
 
 ### 설명
 
@@ -61,7 +61,7 @@
 !!! info "핵심 응답 값"
     클라이언트는 `risk_score`, `on_time_probability`, `latest_safe_dispatch_at`를 최우선 표시 값으로 사용해야 합니다.
 
-## 2. 🧪 POST /api/v1/risk/simulate
+## 2. POST /api/v1/risk/simulate
 
 ### 설명
 
@@ -99,13 +99,13 @@
 }
 ```
 
-## 3. 🏷️ GET /api/v1/terminals
+## 3. GET /api/v1/terminals
 
 ### 설명
 
 지원되는 인천항 터미널 목록을 반환합니다.
 
-## 4. ❤️ GET /api/v1/health
+## 4. GET /api/v1/health
 
 ### 설명
 

@@ -1,4 +1,4 @@
-site_name: ⚓ 인천항 Cut-off 리스크 레이더
+site_name: 인천항 Cut-off 리스크 레이더
 site_url: https://yeongseon.github.io/incheon-port-cutoff-radar/
 site_description: 인천항 반입 cut-off 리스크 예측 MVP 문서
 site_author: yeongseon
@@ -76,29 +76,29 @@ extra:
       link: https://github.com/yeongseon/incheon-port-cutoff-radar
 
 nav:
-  - 🏠 홈: index.md
+  - 홈: index.md
   - 시작하기:
-      - 🚀 빠른 시작: guide/quickstart.md
-      - 🚢 배포 가이드: guide/deployment.md
+      - 빠른 시작: guide/quickstart.md
+      - 배포 가이드: guide/deployment.md
   - 프로젝트:
-      - 📋 프로젝트 개요: specs/00_project_overview.md
-      - 📝 제품 요구사항 정의서: specs/01_prd.md
-      - 🎯 MVP 스펙: specs/02_mvp_spec.md
+      - 프로젝트 개요: specs/00_project_overview.md
+      - 제품 요구사항 정의서: specs/01_prd.md
+      - MVP 스펙: specs/02_mvp_spec.md
   - 아키텍처:
-      - 🏗️ 시스템 아키텍처: specs/03_architecture.md
-      - 📊 데이터 스펙: specs/04_data_spec.md
-      - 🌐 API 스펙: specs/05_api_spec.md
-      - 🗄️ DB 스키마: specs/06_db_schema.md
-      - 🖥️ 프론트엔드 스펙: specs/07_frontend_spec.md
-      - ⚙️ 백엔드 스펙: specs/08_backend_spec.md
-      - 📡 API 참조: guide/api.md
-      - 🧮 리스크 엔진: guide/engine.md
+      - 시스템 아키텍처: specs/03_architecture.md
+      - 데이터 스펙: specs/04_data_spec.md
+      - API 스펙: specs/05_api_spec.md
+      - DB 스키마: specs/06_db_schema.md
+      - 프론트엔드 스펙: specs/07_frontend_spec.md
+      - 백엔드 스펙: specs/08_backend_spec.md
+      - API 참조: guide/api.md
+      - 리스크 엔진: guide/engine.md
   - 운영:
-      - 📅 개발 계획: specs/09_dev_plan.md
-      - 🧪 테스트 계획: specs/10_test_plan.md
-      - ⚠️ 리스크 & 의사결정: specs/11_risk_and_decisions.md
-      - 🎮 데모: demo.md
+      - 개발 계획: specs/09_dev_plan.md
+      - 테스트 계획: specs/10_test_plan.md
+      - 리스크 & 의사결정: specs/11_risk_and_decisions.md
+      - 데모: demo.md
   - 기타:
-      - 🎤 피치 원페이저: specs/12_pitch_one_pager.md
-      - 🗺️ 개발 로드맵: roadmap.md
-      - 🎤 발표 가이드: presentation.md
+      - 피치 원페이저: specs/12_pitch_one_pager.md
+      - 개발 로드맵: roadmap.md
+      - 발표 가이드: presentation.md

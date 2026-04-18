@@ -1,10 +1,10 @@
 import type { ReasonItem } from '../types';
 
 const CODE_ICONS: Record<string, string> = {
-  TRAFFIC: '🚗',
-  TERMINAL_CONGESTION: '🏗️',
-  GATE_FLOW: '🚧',
-  BUFFER: '🛡️',
+  TRAFFIC: '교통',
+  TERMINAL_CONGESTION: '터미널',
+  GATE_FLOW: '게이트',
+  BUFFER: '버퍼',
 };
 
 export function ReasonCards({ reasons }: { reasons: ReasonItem[] }) {
@@ -16,7 +16,7 @@ export function ReasonCards({ reasons }: { reasons: ReasonItem[] }) {
           className="group rounded-2xl border border-slate-200 bg-white/90 p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-300 hover:shadow-xl hover:shadow-blue-950/5"
         >
           <div className="mb-1 flex items-center justify-between gap-3">
-            <span className="font-medium text-slate-800">{CODE_ICONS[r.code] ?? '📌'} {r.label}</span>
+            <span className="font-medium text-slate-800">{CODE_ICONS[r.code] ?? '항목'} {r.label}</span>
             <span className="text-sm text-blue-600 font-semibold">+{r.impact_minutes.toFixed(0)}분</span>
           </div>
           <p className="text-sm text-slate-500">{r.summary}</p>

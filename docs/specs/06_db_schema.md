@@ -1,7 +1,7 @@
-# 🗄️ 데이터베이스 스키마
-## 🚢 인천항 반입 Cut-off 리스크 레이더
+# 데이터베이스 스키마
+## 인천항 반입 Cut-off 리스크 레이더
 
-## 1. 🧱 테이블
+## 1. 테이블
 
 ```mermaid
 erDiagram
@@ -100,7 +100,7 @@ erDiagram
 | contribution_percent | integer |
 | summary | text |
 
-## 2. ⚡ 캐시 키 (Redis)
+## 2. 캐시 키 (Redis)
 
 | 키 패턴 | 목적 |
 |----------|------|

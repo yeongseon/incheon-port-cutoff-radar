@@ -16,7 +16,7 @@ export function Layout({ children }: LayoutProps) {
         <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-3">
             <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-blue-600 shadow-lg shadow-blue-600/20">
-              <span className="text-xl text-white">⚓</span>
+              <span className="text-sm font-semibold text-white">IP</span>
             </div>
             <div>
               <p className="text-[11px] font-semibold tracking-[0.18em] text-blue-600">인천항 운송 인텔리전스</p>
@@ -27,7 +27,7 @@ export function Layout({ children }: LayoutProps) {
           <div className="flex items-center gap-2 text-xs sm:text-sm">
             {IS_DEMO && (
               <span className="rounded-full border border-amber-300 bg-amber-50 px-3 py-1 font-medium text-amber-800 shadow-sm">
-                🧪 데모 모드
+                데모 모드
               </span>
             )}
           </div>

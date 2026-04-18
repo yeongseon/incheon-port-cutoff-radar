@@ -1,7 +1,7 @@
 # 백엔드 명세
 ## 인천항 반입 컨테이너 cut-off 리스크 레이더
 
-## 🧩 1. 모듈 구성
+## 1. 모듈 구성
 
 ### app/api
 
@@ -39,7 +39,7 @@
 - Pydantic 스키마
 - ORM 모델
 
-## 🔄 2. 핵심 서비스 흐름
+## 2. 핵심 서비스 흐름
 
 ### evaluate_dispatch_job()
 
@@ -67,14 +67,14 @@ flowchart TD
     I --> J[return]
 ```
 
-## 📐 3. 엔지니어링 원칙
+## 3. 엔지니어링 원칙
 
 - MVP 단계에서는 엔진을 deterministic하게 유지한다
 - 모든 소스의 최신성 timestamp를 기록한다
 - 각 외부 소스는 client adapter 뒤로 격리한다
 - 계산 로직은 pure function으로 테스트 가능하게 유지한다
 
-## 🛠️ 4. 기술 스택
+## 4. 기술 스택
 
 - Python 3.10+
 - FastAPI

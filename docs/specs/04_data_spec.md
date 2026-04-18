@@ -1,7 +1,7 @@
-# 📊 데이터 명세서
-## 🚢 인천항 반입 Cut-off 리스크 레이더
+# 데이터 명세서
+## 인천항 반입 Cut-off 리스크 레이더
 
-## 1. 🧱 핵심 원천 데이터 그룹
+## 1. 핵심 원천 데이터 그룹
 
 ### 1.1 터미널 혼잡 데이터
 
@@ -22,7 +22,7 @@
 !!! info "데이터 설계 원칙"
     서로 다른 출처의 데이터를 그대로 노출하기보다, 내부 정규화 모델로 변환해 일관된 계산과 설명이 가능하도록 설계합니다.
 
-## 2. 🧩 내부 정규화 모델
+## 2. 내부 정규화 모델
 
 ```mermaid
 erDiagram
@@ -78,7 +78,7 @@ erDiagram
 | observed_at | datetime |
 | source_name | string |
 
-## 3. 📝 사용자 입력 모델
+## 3. 사용자 입력 모델
 
 ### DispatchJobInput
 
@@ -90,7 +90,7 @@ erDiagram
 | conservative_mode | boolean |
 | manual_buffer_minutes | integer \| null |
 
-## 4. 📤 결과 모델
+## 4. 결과 모델
 
 ### DispatchRiskResult
 

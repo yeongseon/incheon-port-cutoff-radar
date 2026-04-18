@@ -1,4 +1,4 @@
-# 🚢 배포 가이드
+# 배포 가이드
 
 인천항 반입 컨테이너 cut-off 리스크 예측 MVP는 **문서/데모 공개용 정적 배포**와 **로컬 통합 검증용 Docker Compose 배포**를 함께 지원합니다. 문서는 GitHub Pages에, 전체 스택 실행은 Docker Compose에 최적화되어 있습니다.
 
@@ -97,7 +97,7 @@ base: '/incheon-port-cutoff-radar/app/'
 
 정적 배포와 별개로, 기능 개발은 백엔드와 프론트엔드를 분리 실행하는 방식이 가장 빠릅니다.
 
-=== "⚙️ 백엔드 터미널"
+=== "백엔드 터미널"
 
     ```bash
     cd backend
@@ -106,7 +106,7 @@ base: '/incheon-port-cutoff-radar/app/'
     uvicorn app.main:app --reload --port 8000
     ```
 
-=== "🖥️ 프론트엔드 터미널"
+=== "프론트엔드 터미널"
 
     ```bash
     cd frontend

@@ -86,7 +86,7 @@ export function ResultPage() {
     return (
       <div className="flex min-h-[calc(100vh-12rem)] items-center justify-center px-4 py-12">
         <div className="rounded-3xl border border-slate-200 bg-white/90 p-10 text-center shadow-xl shadow-slate-950/5">
-          <p className="text-slate-500 mb-4">📭 평가 결과가 없습니다.</p>
+          <p className="text-slate-500 mb-4">평가 결과가 없습니다.</p>
           <button onClick={() => navigate('/')} className="text-blue-600 hover:underline">
             ← 입력 화면으로 돌아가기
           </button>
@@ -113,14 +113,14 @@ export function ResultPage() {
               ← 새로운 평가
             </button>
             <span className="text-xs text-slate-400">
-            🔧 엔진 {result.engine_version} · {formatDateTime(result.evaluated_at)}
-          </span>
+              엔진 {result.engine_version} · {formatDateTime(result.evaluated_at)}
+            </span>
           </div>
         </div>
 
         {result.result_status === 'FAILED' && (
           <div className="rounded-3xl border border-red-300 bg-red-50 p-6 text-center shadow-sm">
-            <p className="text-red-700 font-semibold text-lg">🚫 {result.verdict}</p>
+            <p className="text-red-700 font-semibold text-lg">{result.verdict}</p>
           </div>
         )}
 
@@ -128,7 +128,7 @@ export function ResultPage() {
           <>
             {result.result_status === 'DEGRADED' && (
               <div className="rounded-2xl border border-yellow-300 bg-yellow-50 px-4 py-3 shadow-sm">
-                <p className="text-yellow-800 text-sm font-medium">⚠️ 부분 결과 — 일부 데이터 소스를 사용할 수 없습니다</p>
+                <p className="text-yellow-800 text-sm font-medium">부분 결과 — 일부 데이터 소스를 사용할 수 없습니다</p>
                 {result.warnings.map((w, i) => (
                   <p key={i} className="text-yellow-700 text-xs mt-1">{w.message}</p>
                 ))}
@@ -138,7 +138,7 @@ export function ResultPage() {
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
               <div className={`rounded-3xl border p-6 text-center shadow-sm shadow-slate-900/5 ${probabilityTone(result.on_time_probability)}`}>
                 <div className={`-mx-6 -mt-6 mb-5 h-1 rounded-t-3xl ${probabilityAccent(result.on_time_probability)}`} />
-                <p className="mb-2 text-sm text-slate-500">🎯 정시 도착 확률</p>
+                <p className="mb-2 text-sm text-slate-500">정시 도착 확률</p>
                 <p className={`text-5xl font-semibold tracking-tight ${probabilityColor(result.on_time_probability)}`}>
                   {Math.round(result.on_time_probability * 100)}%
                 </p>
@@ -147,7 +147,7 @@ export function ResultPage() {
 
               <div className={`rounded-3xl border p-6 text-center shadow-sm shadow-slate-900/5 ${riskTone(result.risk_level)}`}>
                 <div className={`-mx-6 -mt-6 mb-5 h-1 rounded-t-3xl ${riskAccentBar(result.risk_level)}`} />
-                <p className="mb-2 text-sm text-slate-500">📊 리스크 점수</p>
+                <p className="mb-2 text-sm text-slate-500">리스크 점수</p>
                 <p className={`text-5xl font-semibold tracking-tight ${riskScoreColor(result.risk_score)}`}>
                   {result.risk_score}
                 </p>
@@ -158,23 +158,23 @@ export function ResultPage() {
 
               <div className="rounded-3xl border border-sky-200 bg-linear-to-br from-sky-50 to-white p-6 text-center shadow-sm shadow-sky-900/5">
                 <div className="-mx-6 -mt-6 mb-5 h-1 rounded-t-3xl bg-sky-500" />
-                <p className="mb-2 text-sm text-slate-500">🕐 최늦 출발 시각</p>
+                <p className="mb-2 text-sm text-slate-500">최늦 출발 시각</p>
                 <p className="text-4xl font-semibold tracking-tight text-slate-800">
                   {formatTime(result.latest_safe_dispatch_at)}
                 </p>
                 <p className="mt-2 text-xs text-slate-400">
-                  ⏱️ 총 소요시간: {result.estimated_total_minutes}분
+                  총 소요시간: {result.estimated_total_minutes}분
                 </p>
               </div>
             </div>
 
             <div className={`rounded-3xl border border-slate-200 border-l-4 bg-white/95 p-6 shadow-sm ${riskAccent(result.risk_level)}`}>
-              <p className="mb-2 text-lg font-semibold text-slate-800">📋 종합 판단</p>
+              <p className="mb-2 text-lg font-semibold text-slate-800">종합 판단</p>
               <p className="text-base leading-7 text-slate-600">{result.verdict}</p>
             </div>
 
             <div className="rounded-3xl border border-slate-200 bg-white/95 p-6 shadow-sm">
-              {sectionHeading('🔎', '리스크 요인 분석')}
+              {sectionHeading('분석', '리스크 요인 분석')}
               <ReasonChart reasons={result.reason_items} />
               <div className="mt-4">
                 <ReasonCards reasons={result.reason_items} />
@@ -182,12 +182,12 @@ export function ResultPage() {
             </div>
 
             <div className="rounded-3xl border border-slate-200 bg-white/95 p-6 shadow-sm">
-              {sectionHeading('📈', '출발 시각 시뮬레이션')}
+              {sectionHeading('시뮬', '출발 시각 시뮬레이션')}
               <SimulationView jobInput={input} />
             </div>
 
             <div className="rounded-3xl border border-slate-200 bg-white/95 p-6 shadow-sm">
-              {sectionHeading('📡', '데이터 신선도')}
+              {sectionHeading('데이터', '데이터 신선도')}
               <FreshnessIndicator items={result.source_freshness} />
             </div>
           </>

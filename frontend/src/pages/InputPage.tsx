@@ -27,7 +27,7 @@ export function InputPage() {
         <section className="animate-slide-up space-y-6">
           <div className="overflow-hidden rounded-[28px] border border-white/70 bg-white/80 p-6 shadow-xl shadow-slate-950/5 backdrop-blur-sm sm:p-8">
             <div className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700">
-              🚢 반입 배차 리스크 평가
+              반입 배차 리스크 평가
             </div>
             <h2 className="mt-4 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
               Cut-off 마감 전에<br className="hidden sm:block" />
@@ -39,10 +39,10 @@ export function InputPage() {
 
             <div className="mt-6 grid grid-cols-2 gap-3">
               {[
-                ['🚗', '교통', '실시간 이동 여건 반영'],
-                ['🏗️', '터미널', '혼잡도와 운영 상태 확인'],
-                ['🚧', '게이트', '진입 흐름과 대기 편차 반영'],
-                ['🛡️', '버퍼', '보수적 여유시간 설정'],
+                ['교', '교통', '실시간 이동 여건 반영'],
+                ['터', '터미널', '혼잡도와 운영 상태 확인'],
+                ['게', '게이트', '진입 흐름과 대기 편차 반영'],
+                ['버', '버퍼', '보수적 여유시간 설정'],
               ].map(([icon, title, description]) => (
                 <div
                   key={title}
@@ -93,46 +93,46 @@ export function InputPage() {
 
           <div className="space-y-4">
             <div className="rounded-2xl border border-slate-200 border-l-4 border-l-blue-500 bg-white p-5 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md">
-              <label className="mb-2 block text-sm font-medium text-slate-700">📍 출발 지역</label>
-            <select
-              value={origin}
-              onChange={(e) => setOrigin(e.target.value)}
-              className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-800 outline-none transition-all duration-200 hover:border-blue-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
-            >
-              {ORIGIN_ZONES.map((z) => (
-                <option key={z.id} value={z.id}>{z.label} ({z.id})</option>
-              ))}
-            </select>
+              <label className="mb-2 block text-sm font-medium text-slate-700">출발 지역</label>
+              <select
+                value={origin}
+                onChange={(e) => setOrigin(e.target.value)}
+                className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-800 outline-none transition-all duration-200 hover:border-blue-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+              >
+                {ORIGIN_ZONES.map((z) => (
+                  <option key={z.id} value={z.id}>{z.label} ({z.id})</option>
+                ))}
+              </select>
             </div>
 
             <div className="rounded-2xl border border-slate-200 border-l-4 border-l-sky-500 bg-white p-5 shadow-sm transition-all duration-300 hover:border-sky-200 hover:shadow-md">
-              <label className="mb-2 block text-sm font-medium text-slate-700">🏗️ 도착 터미널</label>
-            <select
-              value={terminal}
-              onChange={(e) => setTerminal(e.target.value)}
-              className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-800 outline-none transition-all duration-200 hover:border-sky-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
-            >
-              {TERMINALS.map((t) => (
-                <option key={t.code} value={t.code}>{t.name} ({t.code})</option>
-              ))}
-            </select>
+              <label className="mb-2 block text-sm font-medium text-slate-700">도착 터미널</label>
+              <select
+                value={terminal}
+                onChange={(e) => setTerminal(e.target.value)}
+                className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-slate-800 outline-none transition-all duration-200 hover:border-sky-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+              >
+                {TERMINALS.map((t) => (
+                  <option key={t.code} value={t.code}>{t.name} ({t.code})</option>
+                ))}
+              </select>
             </div>
 
             <div className="rounded-2xl border border-slate-200 border-l-4 border-l-cyan-500 bg-white p-5 shadow-sm transition-all duration-300 hover:border-cyan-200 hover:shadow-md">
-              <label className="mb-2 block text-sm font-medium text-slate-700">⏰ Cut-off 시간</label>
-            <input
-              type="datetime-local"
-              value={cutoff}
-              onChange={(e) => setCutoff(e.target.value)}
-              className="w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-800 outline-none transition-all duration-200 hover:border-cyan-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
-              required
-            />
+              <label className="mb-2 block text-sm font-medium text-slate-700">Cut-off 시간</label>
+              <input
+                type="datetime-local"
+                value={cutoff}
+                onChange={(e) => setCutoff(e.target.value)}
+                className="w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-800 outline-none transition-all duration-200 hover:border-cyan-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+                required
+              />
             </div>
 
             <div className="rounded-2xl border border-slate-200 border-l-4 border-l-indigo-500 bg-white p-5 shadow-sm transition-all duration-300 hover:border-indigo-200 hover:shadow-md">
               <div className="flex items-center justify-between gap-4">
                 <div>
-                  <label className="text-sm font-medium text-slate-700">🛡️ 보수적 모드</label>
+                  <label className="text-sm font-medium text-slate-700">보수적 모드</label>
                   <p className="mt-1 text-xs text-slate-400">예상 편차를 더 넉넉하게 반영합니다.</p>
                 </div>
                 <button
@@ -153,23 +153,23 @@ export function InputPage() {
 
             <div className="rounded-2xl border border-slate-200 border-l-4 border-l-blue-400 bg-white p-5 shadow-sm transition-all duration-300 hover:border-blue-200 hover:shadow-md">
               <label className="mb-2 block text-sm font-medium text-slate-700">
-              ⏱️ 수동 버퍼 (분, 선택사항)
-            </label>
-            <input
-              type="number"
-              min="0"
-              max="120"
-              value={buffer}
-              onChange={(e) => setBuffer(e.target.value)}
-              placeholder="자동"
-              className="w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-800 outline-none transition-all duration-200 hover:border-blue-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
-            />
+                수동 버퍼 (분, 선택사항)
+              </label>
+              <input
+                type="number"
+                min="0"
+                max="120"
+                value={buffer}
+                onChange={(e) => setBuffer(e.target.value)}
+                placeholder="자동"
+                className="w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-800 outline-none transition-all duration-200 hover:border-blue-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+              />
             </div>
           </div>
 
           {error && (
             <div className="mt-4 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700 animate-fade-in">
-              ❌ {error}
+              {error}
             </div>
           )}
 
@@ -181,10 +181,10 @@ export function InputPage() {
             {loading ? (
               <span className="relative inline-flex items-center justify-center px-4 py-0.5 text-sm font-semibold sm:text-base">
                 <span className="button-ring absolute inset-0 rounded-full border border-white/40" />
-                <span className="relative">🔍 리스크 평가</span>
+                <span className="relative">리스크 평가</span>
               </span>
             ) : (
-              <span className="text-sm font-semibold sm:text-base">🔍 리스크 평가</span>
+              <span className="text-sm font-semibold sm:text-base">리스크 평가</span>
             )}
           </button>
         </form>
