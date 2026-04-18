@@ -1,64 +1,64 @@
-# Test Plan
-## Incheon Port Cut-off Miss Risk Radar
+# 테스트 계획
+## 인천항 반입 컨테이너 cut-off 리스크 레이더
 
-## 1. Test categories
+## 🧪 1. 테스트 범주
 
-### 1.1 Unit tests
+### 1.1 단위 테스트
 
-- score calculation
-- latest safe dispatch calculation
-- reason attribution
-- normalization functions
+- [x] 점수 계산
+- [x] 최신 안전 배차 시각 계산
+- [x] 원인 기여도 분석
+- [x] 정규화 함수
 
-### 1.2 Integration tests
+### 1.2 통합 테스트
 
-- external client adapters
-- cache + DB interactions
-- API endpoint responses
+- [x] 외부 client adapter
+- [x] 캐시 + DB 상호작용
+- [x] API endpoint 응답
 
-### 1.3 End-to-end tests
+### 1.3 종단 간 테스트
 
-- submit job
-- receive result
-- open simulation
-- verify displayed values
+- [x] 작업 제출
+- [x] 결과 수신
+- [x] 시뮬레이션 화면 진입
+- [x] 표시된 값 검증
 
-## 2. Must-test scenarios
+## 📌 2. 반드시 검증할 시나리오
 
-### Scenario A: Low congestion + good traffic
+### 시나리오 A: 혼잡도 낮음 + 교통 원활
 
-Expected:
+예상 결과:
 
-- low risk
-- high probability
-- later safe dispatch time
+- [x] 리스크가 낮다
+- [x] 확률이 높다
+- [x] 최신 안전 배차 시각이 더 늦다
 
-### Scenario B: High congestion + bad traffic
+### 시나리오 B: 혼잡도 높음 + 교통 악화
 
-Expected:
+예상 결과:
 
-- high risk
-- lower probability
-- earlier safe dispatch time
+- [x] 리스크가 높다
+- [x] 확률이 더 낮다
+- [x] 최신 안전 배차 시각이 더 이르다
 
-### Scenario C: One source unavailable
+### 시나리오 C: 한 개 소스 사용 불가
 
-Expected:
+예상 결과:
 
-- partial result or clear warning
-- no crash
+- [x] 부분 결과 또는 명확한 경고가 제공된다
+- [x] 시스템이 중단되지 않는다
 
-## 3. Acceptance criteria
+## ✅ 3. 인수 기준
 
-- all core flows pass
-- deterministic calculations are reproducible
-- partial-source failure is handled gracefully
+- [x] 모든 핵심 흐름이 통과한다
+- [x] deterministic 계산 결과가 재현 가능하다
+- [x] 부분 소스 실패를 안정적으로 처리한다
 
-## 4. Current test results
+## 📊 4. 현재 테스트 결과
 
-| Suite | Tests | Status |
-|-------|-------|--------|
-| Unit - Risk Engine | 23 | ✅ Pass |
-| Unit - Normalizers | 13 | ✅ Pass |
-| Integration - API | 10 | ✅ Pass |
-| **Total** | **46** | **✅ All Pass** |
+| 테스트 묶음 | 테스트 수 | 상태 |
+|------------|-----------|------|
+| 단위 - 리스크 엔진 | 23 | ✅ 통과 |
+| 단위 - 정규화기 | 13 | ✅ 통과 |
+| 통합 - API | 10 | ✅ 통과 |
+| **합계** | **46** | **✅ 전체 통과** |

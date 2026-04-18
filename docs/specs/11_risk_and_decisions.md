@@ -1,44 +1,65 @@
-# Risks and Key Decisions
-## Incheon Port Cut-off Miss Risk Radar
+# 리스크와 핵심 의사결정
+## 인천항 반입 컨테이너 cut-off 리스크 레이더
 
-## 1. Product decisions
+## 🧭 1. 제품 의사결정
 
-### Decision 1: Use a rule-based engine first
+### 의사결정 1: 먼저 rule-based engine을 사용한다
 
-Reason:
+!!! info "의사결정 배경"
+    MVP 단계에서는 설명 가능성과 구현 속도가 매우 중요합니다. rule-based engine은 대학생 멘토링 프로젝트 문맥에서도 설계 의도를 명확하게 설명하기 좋습니다.
 
-- easier to explain
-- faster to implement
-- better for MVP credibility
+이유:
 
-### Decision 2: Support only Incheon Port in v1
+- 설명이 더 쉽다
+- 구현 속도가 더 빠르다
+- MVP 신뢰성을 확보하기에 유리하다
 
-Reason:
+### 의사결정 2: v1에서는 인천항만 지원한다
 
-- stronger scope control
-- better demo clarity
-- better source alignment
+!!! info "의사결정 배경"
+    초기 버전에서 대상 범위를 좁히면 데이터 소스 정합성과 데모 완성도를 함께 높일 수 있습니다.
 
-### Decision 3: Prioritize latest safe dispatch time
+이유:
 
-Reason:
+- 범위 통제가 더 강해진다
+- 데모 메시지가 더 명확해진다
+- 데이터 소스 정렬이 더 쉬워진다
 
-- actionable output matters more than raw metrics
+### 의사결정 3: 최신 안전 배차 시각을 최우선으로 둔다
 
-## 2. Risks
+!!! info "의사결정 배경"
+    사용자는 수치 자체보다 바로 행동으로 옮길 수 있는 판단 기준을 원합니다. 따라서 최신 안전 배차 시각은 가장 실용적인 핵심 출력입니다.
 
-### Risk 1: Public data may not capture all real-world operational variables
+이유:
 
-**Mitigation:** position product as decision support, not certainty engine
+- 원시 지표보다 실행 가능한 출력이 더 중요하다
 
-### Risk 2: Existing status services may reduce perceived novelty
+## ⚠️ 2. 리스크
 
-**Mitigation:** emphasize per-job decision support and recommendation layer
+### 리스크 1: 공개 데이터가 실제 운영의 모든 변수를 담지 못할 수 있다
 
-### Risk 3: External API quality or availability may vary
+!!! warning "리스크 대응"
+    이 제품은 확정 엔진이 아니라 의사결정 지원 도구로 포지셔닝해야 합니다.
 
-**Mitigation:** cache strategy, degraded mode, freshness warnings
+**완화 방안:** 제품을 확정 판단 도구가 아닌 의사결정 지원 도구로 설명한다
 
-### Risk 4: Traffic estimation may be approximate in MVP
+### 리스크 2: 기존 상태 조회 서비스로 인해 새로움이 약하게 느껴질 수 있다
 
-**Mitigation:** clearly label assumptions, keep route logic simple at first
+!!! warning "리스크 대응"
+    단순 현황 조회가 아니라 건별 배차 판단과 추천을 제공한다는 점을 분명히 강조해야 합니다.
+
+**완화 방안:** 건별 의사결정 지원과 추천 계층을 핵심 차별점으로 강조한다
+
+### 리스크 3: 외부 API 품질이나 가용성이 일정하지 않을 수 있다
+
+!!! warning "리스크 대응"
+    운영 안정성을 위해 캐시, degraded mode, 최신성 경고를 함께 설계해야 합니다.
+
+**완화 방안:** 캐시 전략, degraded mode, 최신성 경고를 적용한다
+
+### 리스크 4: MVP 단계의 교통 추정은 근사치에 머물 수 있다
+
+!!! warning "리스크 대응"
+    초기에는 가정을 명확히 드러내고 경로 로직을 단순하게 유지하는 편이 검증과 설명 모두에 유리합니다.
+
+**완화 방안:** 가정을 명확히 표시하고 초기 경로 로직을 단순하게 유지한다

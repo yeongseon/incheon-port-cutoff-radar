@@ -1,101 +1,113 @@
-# MVP Specification
-## Incheon Port Cut-off Miss Risk Radar
+# 🧪 MVP 명세서
+## 🚢 인천항 반입 Cut-off 리스크 레이더
 
-## 1. MVP objective
+## 1. 🎯 MVP 목표
 
-Prove that public operational data can be transformed into a per-job dispatch decision.
+공공 운영 데이터를 개별 작업 단위의 배차 의사결정으로 변환할 수 있음을 입증합니다.
 
-## 2. MVP statement
+## 2. 🧭 MVP 정의
 
-A user inputs a single inbound job and receives:
+사용자는 단일 반입 작업을 입력하고 다음 결과를 받습니다.
 
-- on-time arrival probability
-- miss risk score
-- latest safe dispatch time
-- reason breakdown
-- simple dispatch-time simulation
+- 정시 도착 확률
+- miss 위험 점수
+- 가장 늦어도 안전한 배차 시각
+- 사유별 분해 결과
+- 간단한 배차 시각 시뮬레이션
 
-## 3. Inputs
+!!! info "MVP가 증명해야 하는 것"
+    이 단계의 핵심은 예측 모델의 복잡성이 아니라, 실제 운영 데이터가 의사결정 지원 값으로 변환될 수 있다는 점을 보여주는 것입니다.
 
-### Required inputs
+## 3. 📝 입력값
 
-- origin
-- destination terminal
-- cut-off datetime
+### 필수 입력값
 
-### Optional inputs
+- 출발지
+- 목적지 터미널
+- cut-off 일시
 
-- conservative mode on/off
-- container type placeholder
-- manual safety buffer override
+### 선택 입력값
 
-## 4. Outputs
+- conservative mode 사용 여부
+- 컨테이너 유형 placeholder
+- 수동 안전 버퍼 조정값
 
-### Primary outputs
+## 4. 📤 출력값
 
-- on-time probability
-- risk score (0-100)
-- risk label (Low / Medium / High)
-- latest safe dispatch time
+### 주요 출력값
 
-### Secondary outputs
+- 정시 도착 확률
+- 위험 점수 (0-100)
+- 위험 라벨 (Low / Medium / High)
+- 가장 늦어도 안전한 배차 시각
 
-- reason contribution list
-- scenario comparison table
+### 보조 출력값
 
-## 5. Core formula structure
+- 사유 기여도 목록
+- 시나리오 비교 표
 
-Estimated total lead time =
+## 5. 🧮 핵심 계산 구조
 
-- road travel time
-- terminal waiting time
-- gate entry adjustment
-- safety buffer
+예상 총 소요 시간 =
 
-## 6. MVP rules
+- 도로 이동 시간
+- 터미널 대기 시간
+- gate 진입 보정값
+- 안전 버퍼
 
-### Risk score buckets
+!!! tip "해석 포인트"
+    사용자는 세부 수식보다도 어떤 요소가 전체 지연을 키우는지에 더 민감하므로, 계산 결과와 함께 사유 설명을 반드시 제공해야 합니다.
+
+## 6. 📐 MVP 규칙
+
+### 위험 점수 구간
 
 - 0-34: Low
 - 35-69: Medium
 - 70-100: High
 
-### On-time probability rough mapping
+### 정시 도착 확률의 대략적 매핑
 
-A deterministic score can first be mapped into a probability band.
+초기 단계에서는 결정론적 점수를 확률 구간으로 매핑할 수 있습니다.
 
-### Latest safe dispatch time
+### 가장 늦어도 안전한 배차 시각
 
+```text
+가장 늦어도 안전한 배차 시각 =
+  cut-off 시각 - 예상 총 소요 시간 - 필수 신뢰 버퍼
 ```
-Latest safe dispatch time =
-  cut-off time - estimated total lead time - required confidence buffer
-```
 
-## 7. MVP assumptions
+## 7. 🔍 MVP 가정
 
-- current public data is enough for a first operational estimate
-- the first model can be rule-based
-- explainability is more important than predictive sophistication
-- terminal-level precision is enough for MVP
+- 현재 이용 가능한 공공 데이터만으로도 1차 운영 추정이 가능하다.
+- 첫 모델은 규칙 기반으로 시작할 수 있다.
+- 예측 정교함보다 설명 가능성이 더 중요하다.
+- MVP 단계에서는 터미널 수준 정밀도로 충분하다.
 
-## 8. MVP constraints
+## 8. ⛔ MVP 제약사항
 
-- no guarantee of exact real-world arrival
-- no enterprise SLA
-- no dynamic route engine in v1
-- no deep weather/ocean model in v1
+- 실제 도착 시각을 정확히 보장하지는 않는다.
+- 기업용 SLA는 제공하지 않는다.
+- v1에서는 동적 경로 엔진을 포함하지 않는다.
+- v1에서는 심층 날씨/해양 모델을 포함하지 않는다.
 
-## 9. Demo scenario
+!!! warning "해석 시 주의"
+    이 결과는 의사결정 지원을 위한 추정값이며, 현장 판단을 완전히 대체하는 확정값으로 사용해서는 안 됩니다.
 
-Example:
+## 9. 🎬 데모 시나리오
 
-- Origin: Songdo warehouse
-- Terminal: selected Incheon terminal
+예시:
+
+- 출발지: 송도 창고
+- 터미널: 선택한 인천항 터미널
 - Cut-off: 17:00
 
-Result:
+결과:
 
-- on-time probability: 41%
-- miss risk: High
-- latest safe dispatch time: 14:20
-- top reasons: traffic, terminal congestion, entry flow
+- 정시 도착 확률: 41%
+- miss 위험: High
+- 가장 늦어도 안전한 배차 시각: 14:20
+- 주요 사유: 교통, 터미널 혼잡, 진입 흐름
+
+!!! danger "핵심 과제"
+    데모에서는 단순히 수치를 보여주는 것을 넘어, 사용자가 **왜 지금 배차하면 위험한지** 즉시 이해하도록 만드는 것이 중요합니다.

@@ -1,5 +1,12 @@
 # ⚓ 인천항 Cut-off 리스크 레이더
 
+[![React](https://img.shields.io/badge/React-19-61DAFB?logo=react)](https://react.dev)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript)](https://typescriptlang.org)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.115-009688?logo=fastapi)](https://fastapi.tiangolo.com)
+[![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite)](https://vitejs.dev)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-4169E1?logo=postgresql)](https://postgresql.org)
+[![License](https://img.shields.io/badge/License-MIT-green)](https://github.com/yeongseon/incheon-port-cutoff-radar)
+
 인천항 반입 컨테이너가 터미널 gate-in cut-off를 충족할 수 있는지 예측하는 웹 기반 의사결정 지원 도구입니다.
 
 **🚢 혼잡 가시화에서 배차 의사결정까지.**

@@ -1,134 +1,146 @@
-# Product Requirements Document
-## Incheon Port Cut-off Miss Risk Radar
+# 📑 제품 요구사항 문서
+## 🚢 인천항 반입 Cut-off 리스크 레이더
 
-## 1. Product goal
+## 1. 🎯 제품 목표
 
-Build a web-based operational decision support tool that estimates whether a container inbound job can meet terminal cut-off at Incheon Port.
+인천항에서 컨테이너 반입 작업이 터미널 cut-off를 충족할 수 있는지 추정하는 웹 기반 운영 의사결정 지원 도구를 구축합니다.
 
-## 2. Users
+!!! info "목표 요약"
+    이 제품의 핵심 목표는 복잡한 운영 데이터를 모아, 현장 사용자가 **지금 배차해도 안전한지** 빠르게 판단하도록 돕는 것입니다.
 
-### Primary users
+## 2. 👥 사용자
 
-- freight forwarder operators
-- transport dispatch managers
-- export operation staff
+### 주요 사용자
 
-### User intent
+- 포워더 운영 담당자
+- 운송 배차 관리자
+- 수출 운영 실무자
 
-Users want quick answers to:
+### 사용자 의도
 
-- Can I still make the cut-off?
-- How risky is it?
-- When is the latest safe dispatch time?
+사용자는 다음 질문에 대한 빠른 답을 원합니다.
 
-## 3. Core user story
+- 아직 cut-off를 맞출 수 있는가?
+- 위험도는 얼마나 높은가?
+- 가장 늦어도 안전한 배차 시각은 언제인가?
 
-As a logistics operator,
-I want to input origin, destination terminal, and cut-off time,
-so that I can know whether dispatching now is safe.
+## 3. 🧾 핵심 사용자 스토리
 
-## 4. MVP scope
+물류 운영 담당자로서,
+출발지, 목적지 터미널, cut-off 시각을 입력하고,
+지금 배차하는 것이 안전한지 알고 싶다.
 
-### Included
+## 4. 📦 MVP 범위
 
-- input form for origin / terminal / cut-off
-- real-time or near-real-time public data ingestion
-- risk score calculation
-- latest safe dispatch time recommendation
-- reason summary
-- dispatch-time simulation
+### 포함 항목
 
-### Excluded
+- 출발지 / 터미널 / cut-off 입력 폼
+- 실시간 또는 준실시간 공공 데이터 수집
+- 위험 점수 계산
+- 최신 안전 배차 시각 추천
+- 사유 요약
+- 배차 시각 시뮬레이션
 
-- machine learning prediction model
-- enterprise system integration
-- SMS / push notifications
-- multi-port support
-- detailed weather/ocean intelligence engine
-- native mobile app
+### 제외 항목
 
-## 5. Functional requirements
+- 머신러닝 예측 모델
+- 기업 시스템 연동
+- SMS / 푸시 알림
+- 다중 항만 지원
+- 정교한 날씨/해양 정보 엔진
+- 네이티브 모바일 앱
 
-### FR-1 Job input
+!!! warning "MVP 범위 통제"
+    기능을 지나치게 넓히면 시연 품질과 구현 완성도가 떨어질 수 있으므로, 첫 버전은 판단 흐름 자체에 집중합니다.
 
-The system shall allow users to input:
+## 5. 🛠️ 기능 요구사항
 
-- origin
-- destination terminal
-- cut-off datetime
+### FR-1 작업 입력
 
-### FR-2 Data aggregation
+시스템은 사용자가 다음 정보를 입력할 수 있도록 해야 합니다.
 
-The system shall fetch and normalize:
+- 출발지
+- 목적지 터미널
+- cut-off 일시
 
-- terminal congestion data
-- terminal information data
-- vehicle entry data
-- traffic data
+### FR-2 데이터 집계
 
-### FR-3 Risk evaluation
+시스템은 다음 데이터를 수집하고 정규화해야 합니다.
 
-The system shall calculate:
+- 터미널 혼잡 데이터
+- 터미널 운영 정보
+- 차량 진입 데이터
+- 교통 데이터
 
-- estimated total lead time
-- on-time probability
-- cut-off miss risk score
+### FR-3 위험 평가
 
-### FR-4 Recommendation
+시스템은 다음 값을 계산해야 합니다.
 
-The system shall recommend:
+- 총 소요 시간 추정치
+- 정시 도착 확률
+- cut-off miss 위험 점수
 
-- latest safe dispatch time
+### FR-4 추천
 
-### FR-5 Explainability
+시스템은 다음 정보를 추천해야 합니다.
 
-The system shall provide:
+- 가장 늦어도 안전한 배차 시각
 
-- top reason factors
-- brief textual interpretation
+### FR-5 설명 가능성
 
-### FR-6 Simulation
+시스템은 다음 정보를 제공해야 합니다.
 
-The system shall allow the user to compare results for:
+- 상위 위험 사유 요인
+- 짧은 텍스트 해석
 
-- current dispatch
-- 15 minutes earlier
-- 30 minutes earlier
-- 60 minutes earlier
+### FR-6 시뮬레이션
 
-## 6. Non-functional requirements
+시스템은 사용자가 다음 조건의 결과를 비교할 수 있도록 해야 합니다.
 
-### NFR-1 Response speed
+- 현재 시각 배차
+- 15분 더 이른 배차
+- 30분 더 이른 배차
+- 60분 더 이른 배차
 
-Results should be returned within a few seconds when cached data is available.
+!!! danger "핵심 과제"
+    결과가 정확해 보여도, 사용자가 **왜 그런 결과가 나왔는지** 이해하지 못하면 실제 의사결정 지원 도구로서 가치가 크게 떨어집니다.
 
-### NFR-2 Reliability
+## 6. 🧩 비기능 요구사항
 
-External API failures should not crash the user flow.
-Fallback and cache logic are required.
+### NFR-1 응답 속도
 
-### NFR-3 Transparency
+캐시된 데이터를 사용할 수 있을 때 결과는 몇 초 이내에 반환되어야 합니다.
 
-The result must include input timestamp and data freshness indication.
+### NFR-2 신뢰성
 
-### NFR-4 Simplicity
+외부 API 실패가 사용자 흐름 전체를 중단시켜서는 안 됩니다.
+Fallback 및 캐시 로직이 필요합니다.
 
-The MVP must stay narrow and easy to demo.
+### NFR-3 투명성
 
-## 7. Key UX principle
+결과에는 입력 시각과 데이터 최신성 표시가 포함되어야 합니다.
 
-The user must understand the answer without reading a long report.
+### NFR-4 단순성
 
-The result page must make these visible first:
+MVP는 범위를 좁게 유지하고 시연하기 쉬워야 합니다.
 
-1. on-time probability
-2. miss risk level
-3. latest safe dispatch time
+!!! tip "데모 친화성"
+    멘토링 프로젝트에서는 완벽한 자동화보다, 짧은 시간 안에 핵심 가치가 명확히 전달되는 UX가 중요합니다.
 
-## 8. MVP success metrics
+## 7. 🖥️ 핵심 UX 원칙
 
-- data ingestion from core APIs works reliably
-- one inbound scenario can be processed end-to-end
-- latest safe dispatch time is shown correctly
-- simulation view works
-- demo flow can be explained in under 2 minutes
+사용자는 긴 보고서를 읽지 않고도 답을 이해할 수 있어야 합니다.
+
+결과 페이지에서는 다음 항목이 가장 먼저 보여야 합니다.
+
+1. 정시 도착 확률
+2. miss 위험 수준
+3. 가장 늦어도 안전한 배차 시각
+
+## 8. 📏 MVP 성공 지표
+
+- 핵심 API로부터 데이터 수집이 안정적으로 동작한다.
+- 하나의 반입 시나리오가 end-to-end로 처리된다.
+- 최신 안전 배차 시각이 올바르게 표시된다.
+- 시뮬레이션 화면이 동작한다.
+- 데모 흐름을 2분 이내에 설명할 수 있다.

@@ -1,71 +1,74 @@
-# Frontend Specification
-## Incheon Port Cut-off Miss Risk Radar
+# 프론트엔드 명세
+## 인천항 반입 컨테이너 cut-off 리스크 레이더
 
-## 1. Pages
+## 🚪 1. 페이지 구성
 
-### 1.1 Home / Input page
+### 1.1 홈 / 입력 페이지
 
-Components:
+구성 요소:
 
-- origin input (zone select)
-- terminal select
-- cut-off datetime input
-- conservative mode toggle
-- submit button
+- 출발지 입력 (zone 선택)
+- 터미널 선택
+- cut-off 일시 입력
+- conservative mode 토글
+- 제출 버튼
 
-### 1.2 Result page
+### 1.2 결과 페이지
 
-Components:
+구성 요소:
 
-- probability card
-- risk score card
-- latest safe dispatch time card
-- short verdict banner
-- data freshness note
+- 확률 카드
+- 리스크 점수 카드
+- 최신 안전 배차 시각 카드
+- 짧은 판정 배너
+- 데이터 최신성 안내 문구
 
-### 1.3 Reason analysis section
+### 1.3 원인 분석 섹션
 
-Components:
+구성 요소:
 
-- contribution bar chart
-- reason summary cards
+- 기여도 막대 차트
+- 원인 요약 카드
 
-### 1.4 Simulation section
+### 1.4 시뮬레이션 섹션
 
-Components:
+구성 요소:
 
-- scenario comparison table
-- probability line/bar chart
+- 시나리오 비교 표
+- 확률 선/막대 차트
 
-## 2. UX priorities
+## ✨ 2. UX 우선순위
 
-- show the answer fast
-- put the latest safe dispatch time above the fold
-- avoid dense logistics jargon
-- show degraded data warnings clearly
+!!! info "UX 우선순위"
+    사용자는 복잡한 물류 용어보다 **지금 출발해도 되는지**를 빠르게 알고 싶습니다. 따라서 첫 화면과 결과 화면 모두에서 핵심 판단 정보를 가장 먼저 보여줘야 합니다.
 
-## 3. UI states
+- 답을 빠르게 보여준다
+- 최신 안전 배차 시각을 첫 화면 영역(above the fold)에 배치한다
+- 과도하게 빽빽한 물류 전문 용어 사용을 피한다
+- 데이터 저하(degraded data) 경고를 분명하게 보여준다
 
-### Loading
+## 🧭 3. UI 상태
 
-- skeleton cards
-- loading banner
+### 로딩
 
-### Success
+- 스켈레톤 카드
+- 로딩 배너
 
-- main result cards
-- reasons
-- simulation
+### 성공
 
-### Partial data
+- 메인 결과 카드
+- 원인 분석
+- 시뮬레이션
 
-- result shown with warning badge
+### 부분 데이터
 
-### Failure
+- 경고 배지와 함께 결과를 표시
 
-- friendly retry message
+### 실패
 
-## 4. Tech stack
+- 친절한 재시도 안내 메시지
+
+## 🛠️ 4. 기술 스택
 
 - React 19
 - TypeScript

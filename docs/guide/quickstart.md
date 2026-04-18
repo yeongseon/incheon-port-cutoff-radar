@@ -1,5 +1,13 @@
 # 🚀 빠른 시작 가이드
 
+!!! tip "데모 체험 (설치 불필요)"
+
+    라이브 데모: https://yeongseon.github.io/incheon-port-cutoff-radar/app/
+
+    1. 데모 페이지에 접속합니다.
+    2. 출발 지역, 터미널, cut-off 시간을 입력합니다.
+    3. 리스크 점수, 정시 확률, 최늦 출발 시각을 바로 확인합니다.
+
 ## 📋 사전 요구사항
 
 - 🐳 Docker & Docker Compose (권장)
@@ -42,18 +50,24 @@ npm run dev
 
 프론트엔드는 http://localhost:5173 에서 실행되며, Vite 프록시를 통해 백엔드와 통신합니다.
 
+!!! info "Vite 프록시"
+
+    프론트엔드 개발 서버는 `/api` 요청을 백엔드로 프록시하여 로컬 개발 중 CORS 설정 부담을 줄입니다.
+
 ## 🧪 테스트 실행
 
-```bash
-cd backend
-python3 -m pytest tests/ -v
-```
+!!! note "테스트 현황"
 
-✅ 현재 46개 테스트 전부 통과:
+    ```bash
+    cd backend
+    python3 -m pytest tests/ -v
+    ```
 
-- 🧮 단위 테스트 - 리스크 엔진: 23개
-- 🔄 단위 테스트 - 정규화: 13개
-- 🌐 통합 테스트 - API: 10개
+    ✅ 현재 46개 테스트 전부 통과:
+
+    - 🧮 단위 테스트 - 리스크 엔진: 23개
+    - 🔄 단위 테스트 - 정규화: 13개
+    - 🌐 통합 테스트 - API: 10개
 
 ## ⚙️ 환경 변수
 

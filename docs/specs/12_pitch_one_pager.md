@@ -1,39 +1,42 @@
-# One-Pager
-## Incheon Port Cut-off Miss Risk Radar
+# 원페이지 소개
+## 인천항 반입 컨테이너 cut-off 리스크 레이더
 
-## Problem
+!!! note "한 줄 요약"
+    흩어진 항만 운영 데이터와 교통 데이터를 결합해, **지금 배차해도 cut-off를 맞출 수 있는지**를 한 번에 판단하도록 돕는 웹 서비스입니다.
 
-Incheon port operations already monitor congestion, turnaround time, and terminal status.
-But operators still struggle to answer one practical question:
+## ❗ 문제
 
-> Can this specific inbound job still make the cut-off if we dispatch now?
+인천항 운영 현장에서는 이미 혼잡도, Turnaround Time, 터미널 상태를 모니터링하고 있습니다.
+하지만 실무자는 여전히 한 가지 실질적인 질문에 답하기 어렵습니다.
 
-## Solution
+> 지금 이 특정 반입 작업을 출발시키면 cut-off를 맞출 수 있는가?
 
-A web service that combines public port and traffic data to output:
+## 💡 해결책
 
-- on-time probability
-- cut-off miss risk score
-- latest safe dispatch time
-- top contributing reasons
+공개 항만 데이터와 교통 데이터를 결합해 다음 정보를 제공하는 웹 서비스입니다.
 
-## Why now
+- 정시 도착 확률
+- cut-off 미준수 리스크 점수
+- 최신 안전 배차 시각
+- 주요 기여 원인
 
-- operational status data already exists
-- users still need job-level decisions
-- the gap is between "status visibility" and "dispatch action"
+## ⏰ 왜 지금인가
 
-## MVP
+- 운영 현황 데이터는 이미 충분히 존재한다
+- 사용자는 여전히 작업 단위의 의사결정을 필요로 한다
+- 공백은 "현황 가시화"와 "배차 실행" 사이에 있다
 
-- Incheon only
-- web app only
-- deterministic scoring model
-- simulation included
+## 🚀 MVP 범위
 
-## Main value
+- 인천항만 우선 지원
+- 웹앱 중심 제공
+- deterministic 점수화 모델 적용
+- 시뮬레이션 기능 포함
 
-The project transforms fragmented public operational data into one actionable recommendation.
+## 🎯 핵심 가치
 
-## Tagline
+이 프로젝트는 파편화된 공개 운영 데이터를 하나의 실행 가능한 추천으로 바꿔 줍니다.
 
-**From congestion visibility to dispatch decision.**
+## 🏷️ 태그라인
+
+**혼잡 가시화에서 배차 의사결정까지**

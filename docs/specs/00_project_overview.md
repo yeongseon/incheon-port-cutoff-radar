@@ -1,88 +1,103 @@
-# Incheon Port Cut-off Miss Risk Radar
-## Project Overview
+# 🚢 인천항 반입 Cut-off 리스크 레이더
+## 📘 프로젝트 개요
 
-## 1. What this project is
+## 1. 🧭 이 프로젝트는 무엇인가
 
-Incheon Port Cut-off Miss Risk Radar is a decision-support web service for inbound container operations.
+인천항 Cut-off Miss Risk Radar는 반입 컨테이너 운영을 위한 웹 기반 의사결정 지원 서비스입니다.
 
-A user enters:
+사용자는 다음 정보를 입력합니다.
 
-- origin
-- destination terminal
-- gate-in cut-off time
+- 출발지
+- 목적지 터미널
+- gate-in cut-off 시각
 
-The system returns:
+시스템은 다음 결과를 반환합니다.
 
-- estimated on-time arrival probability
-- cut-off miss risk score
-- latest safe dispatch time
-- top contributing reasons
+- 정시 도착 확률 추정치
+- cut-off miss 위험 점수
+- 가장 늦어도 안전한 배차 시각
+- 결과에 가장 크게 기여한 주요 사유
 
-## 2. Why this project exists
+!!! info "프로젝트 한눈에 보기"
+    이 서비스는 단순 현황 조회가 아니라, **지금 배차해도 되는지**를 빠르게 판단할 수 있도록 돕는 상위 의사결정 레이어입니다.
 
-Current port-related systems mainly expose operational status such as congestion level, turnaround time, and terminal-related information.
+## 2. 🎯 왜 이 프로젝트가 필요한가
 
-However, field operators still need to answer a more direct question:
+기존 항만 관련 시스템은 주로 혼잡도, turnaround time, 터미널 상태 같은 운영 현황을 보여주는 데 집중합니다.
 
-> "Can this specific job still make the cut-off if we dispatch now?"
+하지만 현장 운영자는 더 직접적인 질문에 답해야 합니다.
 
-This project focuses on that question.
+> "지금 이 작업을 배차하면 정말 cut-off를 맞출 수 있는가?"
 
-## 3. Problem statement
+이 프로젝트는 바로 그 질문에 집중합니다.
 
-In port logistics operations, missing gate-in cut-off can cause:
+!!! tip "멘토링 프로젝트 관점"
+    대학생 멘토링 프로젝트로서 이 주제는 공공 데이터, 웹 서비스, 운영 의사결정 로직을 하나로 연결해 볼 수 있다는 점에서 교육적 가치가 큽니다.
 
-- shipment delay
-- replanning
-- extra operational cost
-- missed sailing risk
+## 3. ⚠️ 문제 정의
 
-At the same time, users often need to manually combine:
+항만 물류 운영에서 gate-in cut-off를 놓치면 다음과 같은 문제가 발생할 수 있습니다.
 
-- road traffic information
-- terminal congestion
-- entry flow information
-- terminal operational hints
+- 선적 지연
+- 재계획 수립 필요
+- 추가 운영 비용 발생
+- 예정 선박 미적재 위험
 
-This project converts those fragmented data points into one operational decision.
+동시에 사용자는 다음 정보를 수작업으로 종합해야 하는 경우가 많습니다.
 
-## 4. Product positioning
+- 도로 교통 정보
+- 터미널 혼잡도
+- 반입 차량 진입 흐름 정보
+- 터미널 운영 관련 안내 정보
 
-This service does **not** replace existing status dashboards.
+이 프로젝트는 이렇게 흩어진 데이터를 하나의 운영 의사결정으로 변환합니다.
 
-Instead, it acts as an upper decision layer on top of:
+!!! warning "운영상 유의점"
+    동일한 시각이라도 교통 상황, 터미널 현장 운영, 공공 데이터 갱신 주기에 따라 실제 결과는 달라질 수 있습니다.
 
-- terminal congestion data
-- terminal information data
-- gate entry statistics
-- traffic information
+## 4. 🧱 제품 포지셔닝
 
-## 5. Primary target users
+이 서비스는 기존 현황 대시보드를 대체하지 않습니다.
 
-- freight forwarder operators
-- dispatch coordinators
-- export logistics staff
-- port-related planning staff
-- students building a maritime ICT capstone
+대신 다음 데이터 위에서 동작하는 **상위 의사결정 서비스**로 위치합니다.
 
-## 6. First-release scope
+- 터미널 혼잡 데이터
+- 터미널 정보 데이터
+- gate 진입 통계
+- 교통 정보
 
-The first release is an MVP for **Incheon Port only**.
+!!! danger "핵심 과제"
+    핵심은 여러 출처의 운영 데이터를 단순 나열하지 않고, **배차 가능 여부**라는 실행 가능한 판단으로 바꾸는 것입니다.
 
-It will support:
+## 5. 👥 주요 대상 사용자
 
-- one port
-- limited terminal list
-- web UI only
-- rule-based risk engine
-- no external enterprise integrations
+- 포워더 운영 담당자
+- 배차 코디네이터
+- 수출 물류 실무자
+- 항만 관련 기획 담당자
+- 해운·항만 ICT 캡스톤을 수행하는 학생 팀
 
-## 7. Success criteria
+## 6. 🚀 첫 릴리스 범위
 
-The MVP is successful if a user can:
+첫 릴리스는 **인천항 전용 MVP**입니다.
 
-1. input a single inbound job
-2. get a result in a few seconds
-3. understand whether the job is risky
-4. see a recommended latest dispatch time
-5. understand the main reasons behind the result
+지원 범위는 다음과 같습니다.
+
+- 단일 항만
+- 제한된 터미널 목록
+- 웹 UI 전용
+- 규칙 기반 위험 엔진
+- 외부 기업 시스템 연동 제외
+
+!!! note "범위 설정 이유"
+    MVP 단계에서는 넓은 확장성보다, 한 항만에서 end-to-end 흐름을 정확하고 이해하기 쉽게 시연하는 것이 더 중요합니다.
+
+## 7. ✅ 성공 기준
+
+MVP는 사용자가 다음을 수행할 수 있을 때 성공으로 봅니다.
+
+1. 단일 반입 작업을 입력할 수 있다.
+2. 몇 초 안에 결과를 받을 수 있다.
+3. 해당 작업이 위험한지 이해할 수 있다.
+4. 권장되는 최신 안전 배차 시각을 확인할 수 있다.
+5. 결과의 주요 원인을 이해할 수 있다.

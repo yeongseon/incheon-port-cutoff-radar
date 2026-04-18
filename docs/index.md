@@ -1,10 +1,38 @@
 # ⚓ 인천항 Cut-off 리스크 레이더
 
+[![React](https://img.shields.io/badge/React-19-61DAFB?logo=react)](https://react.dev)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript)](https://typescriptlang.org)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.115-009688?logo=fastapi)](https://fastapi.tiangolo.com)
+[![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite)](https://vitejs.dev)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-4169E1?logo=postgresql)](https://postgresql.org)
+[![License](https://img.shields.io/badge/License-MIT-green)](https://github.com/yeongseon/incheon-port-cutoff-radar)
+
 **인천항 반입 cut-off 리스크 예측 MVP**
 
 > 🚢 혼잡 가시화에서 배차 의사결정까지.
 
+🔗 **[라이브 데모](../app/)** · 📡 **[API 문서](guide/api.md)** · 🚀 **[빠른 시작](guide/quickstart.md)**
+
 ---
+
+## 🚨 문제 정의
+
+| 문제 유형 | 설명 |
+|-----------|------|
+| ⏰ Cut-off 초과 | gate-in 마감 시간 초과로 선적 지연 |
+| 📊 분산된 정보 | 교통/터미널/게이트 데이터를 수동 조합 |
+| 🔄 재계획 비용 | 미스 시 재배차 + 추가 비용 발생 |
+| 🚢 선적 누락 | 최악의 경우 해당 선편 누락 |
+
+!!! danger "핵심 과제"
+
+    cut-off 미스는 단순 지연이 아니라 선적 누락, 재계획 비용, 고객 신뢰 하락으로 이어진다. '상태 모니터링'이 아니라 '의사결정 지원'이 목표다.
+
+## 🎯 프로젝트 목표
+
+1. 실시간 교통·터미널·게이트 신호를 결합해 반입 cut-off 충족 가능성을 빠르게 판단합니다.
+2. 배차 담당자가 출발 시각 조정, 보수적 운행, 재계획 여부를 즉시 결정할 수 있도록 지원합니다.
+3. cut-off 미스에 따른 선적 누락과 추가 운영비를 줄이는 방향으로 리스크를 시각화합니다.
 
 ## 📌 프로젝트 소개
 

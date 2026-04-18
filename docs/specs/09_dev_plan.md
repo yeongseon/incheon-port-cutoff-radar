@@ -1,65 +1,82 @@
-# 7-Month Development Plan
-## Incheon Port Cut-off Miss Risk Radar
+# 7개월 개발 계획
+## 인천항 반입 컨테이너 cut-off 리스크 레이더
 
-## Month 1: Discovery and scope lock
+## 📅 전체 일정 개요
 
-- finalize problem statement
-- verify public source usability
-- define MVP boundaries
-- review existing services and public award archive
+```mermaid
+gantt
+    title 인천항 반입 컨테이너 cut-off 리스크 예측 MVP 개발 일정
+    dateFormat  YYYY-MM-DD
+    axisFormat  %m월
+    section 계획
+    문제 정의 및 범위 확정        :done, m1, 2026-01-01, 31d
+    데이터 PoC                  :done, m2, after m1, 28d
+    데이터 파이프라인 기반 구축    :done, m3, after m2, 31d
+    리스크 엔진 v1              :done, m4, after m3, 30d
+    프론트엔드 MVP              :done, m5, after m4, 31d
+    고도화 및 다듬기             :done, m6, after m5, 30d
+    최종 패키지 정리             :done, m7, after m6, 31d
+```
 
-**Deliverables:** scope doc, source inventory, architecture draft
+## 🔎 1개월 차: 문제 탐색 및 범위 확정
 
-## Month 2: Data PoC
+- [x] 문제 정의를 최종 확정한다
+- [x] 공개 데이터 소스의 활용 가능성을 검증한다
+- [x] MVP 범위를 정의한다
+- [x] 기존 서비스와 공공 수상작 아카이브를 검토한다
 
-- build API clients
-- validate payload shapes
-- build normalization rules
-- create sample evaluation scenarios
+**산출물:** 범위 정의 문서, 데이터 소스 인벤토리, 아키텍처 초안
 
-**Deliverables:** API PoC, normalized source examples, early risk formula prototype
+## 🧪 2개월 차: 데이터 PoC
 
-## Month 3: Data pipeline foundation
+- [x] API client를 구축한다
+- [x] payload 형태를 검증한다
+- [x] 정규화 규칙을 작성한다
+- [x] 샘플 평가 시나리오를 만든다
 
-- implement fetch/cache/store pattern
-- define DB schema
-- implement snapshot logging
-- add failure handling
+**산출물:** API PoC, 정규화된 소스 예시, 초기 리스크 공식 프로토타입
 
-**Deliverables:** working data layer, persistence layer, cache strategy
+## 🏗️ 3개월 차: 데이터 파이프라인 기반 구축
 
-## Month 4: Risk engine v1
+- [x] fetch/cache/store 패턴을 구현한다
+- [x] DB 스키마를 정의한다
+- [x] 스냅샷 로깅을 구현한다
+- [x] 실패 처리 로직을 추가한다
 
-- deterministic scoring model
-- probability mapping
-- latest safe dispatch calculation
-- reason attribution logic
+**산출물:** 동작하는 데이터 계층, 영속성 계층, 캐시 전략
 
-**Deliverables:** engine v1, unit tests, scenario fixtures
+## ⚙️ 4개월 차: 리스크 엔진 v1
 
-## Month 5: Frontend MVP
+- [x] deterministic 점수화 모델을 구현한다
+- [x] 확률 매핑 로직을 구현한다
+- [x] 최신 안전 배차 시각 계산 로직을 구현한다
+- [x] 원인 기여도 분석 로직을 구현한다
 
-- input page
-- result page
-- reason section
-- simulation section
+**산출물:** 엔진 v1, 단위 테스트, 시나리오 fixture
 
-**Deliverables:** MVP web app, demo-ready UI
+## 🖥️ 5개월 차: 프론트엔드 MVP
 
-## Month 6: Refinement
+- [x] 입력 페이지를 구현한다
+- [x] 결과 페이지를 구현한다
+- [x] 원인 분석 섹션을 구현한다
+- [x] 시뮬레이션 섹션을 구현한다
 
-- tune scoring weights
-- improve wording
-- improve degraded-data handling
-- validate demo scenarios
+**산출물:** MVP 웹앱, 데모 가능한 UI
 
-**Deliverables:** engine v2, refined UX, demo script
+## 🎯 6개월 차: 고도화
 
-## Month 7: Final package
+- [x] 점수 가중치를 조정한다
+- [x] 문구 표현을 개선한다
+- [x] degraded-data 처리 방식을 개선한다
+- [x] 데모 시나리오를 검증한다
 
-- final report
-- presentation deck
-- demo video flow
-- next-step roadmap
+**산출물:** 엔진 v2, 개선된 UX, 데모 스크립트
 
-**Deliverables:** final docs, pitch package, release candidate
+## 📦 7개월 차: 최종 패키지
+
+- [x] 최종 보고서를 정리한다
+- [x] 발표 자료를 제작한다
+- [x] 데모 영상 흐름을 정리한다
+- [x] 다음 단계 로드맵을 수립한다
+
+**산출물:** 최종 문서, 피치 패키지, 릴리스 후보본
